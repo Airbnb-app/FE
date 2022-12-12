@@ -7,7 +7,13 @@ module.exports = withMT({
     "./components/**/*.{js,jsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "pink-airbnb": "#FF5A60",
+        "black-airbnb": "#2F2F2F",
+        "cream-airbnb": "#F7DED4",
+      },
+    },
   },
   plugins: [require("daisyui")],
 })
