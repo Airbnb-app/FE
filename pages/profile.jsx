@@ -3,7 +3,7 @@ import HomestayCard from "../components/HomestayCard";
 import Layout from "../components/Layout";
 import { CgProfile } from "react-icons/cg";
 import Navbar from "../components/Navbar";
-import Modal from "../components/Modal";
+import { Modal1, Modal2 } from "../components/Modal";
 import { CostumInput3, CostumInput } from "../components/CostumInput";
 import { RiPencilFill } from "react-icons/ri";
 
@@ -19,9 +19,9 @@ const Profile = () => {
             <p className="text-black-airbnb mt-3 font-bold">Email: </p>
           </div>
           <div className="mx-5 mt-8 flex">
-            <p>
-              <Modal titleModal={"Upgrade to Hoster"} no={"1"} title={"Upgrade to Hoster"} tombol1={"Cancel"} tombol2={"Upgrade"} inputOne={<CostumInput3 />} />
-            </p>
+            <div>
+              <Modal1 titleModal={"Upgrade to Hoster"} no={6} title={"Upgrade to Hoster"} tombol1={"Cancel"} tombol2={"Upgrade"} inputOne={<CostumInput3 />} />
+            </div>
             <p>
               <span className="mx-2">|</span>
             </p>
@@ -34,11 +34,11 @@ const Profile = () => {
       <div className="flex justify-center">
         <HomestayCard
           edit={
-            <Modal
+            <Modal2
               titleModal={"Edit Homestay Post"}
-              no={"2"}
+              no={2}
               title={
-                <div className="flex flex-col justify-center items-center">
+                <div className="flex flex-col items-center justify-center cursor-pointer">
                   <RiPencilFill />
                   <p>Edit</p>
                 </div>

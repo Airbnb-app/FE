@@ -1,10 +1,10 @@
 import React from "react";
 import { Input } from "@material-tailwind/react";
 
-const CostumInput = ({ label, type, onChange, value }) => {
+const CostumInput = ({ label, type }) => {
   return (
     <div className="w-full py-2 mt-5 ">
-      <Input onChange={onChange} value={value} label={label} type={type} className="w-full text-black-airbnb" />
+      <Input label={label} type={type} className="w-full text-black-airbnb" />
     </div>
   );
 };
