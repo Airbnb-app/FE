@@ -6,7 +6,8 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 
 const Sidebar = () => {
   return (
-    <div className=" bg-pink-airbnb w-80 h-screen p-5">
+    <div className="flex flex-col">
+      <div className=" bg-pink-airbnb w-80 h-screen p-5">
       <div className="h-96">
         <div className="flex justify-center items-center">
           <div className="text-5xl text-white flex items-center ">
@@ -54,6 +55,8 @@ const Sidebar = () => {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 };
 
