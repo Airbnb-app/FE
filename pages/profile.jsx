@@ -20,7 +20,7 @@ const Profile = () => {
           </div>
           <div className="mx-5 mt-8 flex">
             <div>
-              <Modal1 titleModal={"Upgrade to Hoster"} no={6} title={"Upgrade to Hoster"} tombol1={"Cancel"} tombol2={"Upgrade"} inputOne={<CostumInput3 />} />
+              <Modal1 titleModal={"Upgrade to Hoster"} no={6} title={"Upgrade to Hoster"} tombol1={"Cancel"} tombol2={"Upgrade"} inputOne={<CostumInput3 />} inputTwo={<CostumInput3 />} inputThree={<CostumInput3 />} />
             </div>
             <p>
               <span className="mx-2">|</span>

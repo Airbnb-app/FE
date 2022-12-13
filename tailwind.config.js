@@ -16,4 +16,7 @@ module.exports = withMT({
     },
   },
   plugins: [require("daisyui"), require("tw-elements/dist/plugin")],
+  daisyui: {
+    themes: false,
+  },
 });

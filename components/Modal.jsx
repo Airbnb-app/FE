@@ -1,6 +1,6 @@
 import React from "react";
 
-const Modal1 = ({ no, title, inputOne, tombol1, tombol2, titleModal }) => {
+const Modal1 = ({ no, title, inputOne, inputTwo, inputThree, tombol1, tombol2, titleModal }) => {
   return (
     <>
       <label htmlFor={`my-modal-${no}`} className={`normal-case text-pink-airbnb bg-transparent cursor-pointer`}>
@@ -12,6 +12,9 @@ const Modal1 = ({ no, title, inputOne, tombol1, tombol2, titleModal }) => {
         <div className="modal-box  flex flex-col justify-center items-center">
           <h3 className="font-bold lg:text-2xl  text-base text-pink-airbnb text-center  ">{titleModal}</h3>
           {inputOne ? inputOne : null}
+          {inputTwo ? inputTwo : null}
+          {inputThree ? inputThree : null}
+
           <div className="grid grid-cols-2 w-2/3 md:w-full lg:w-full max-w-md mt-3">
             <label htmlFor={`my-modal-${no}`} className="btn bg-pink-airbnb normal-case border-none mx-1 hover:bg-red-900">
               {tombol1}
