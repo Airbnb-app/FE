@@ -2,14 +2,39 @@ import React from "react";
 import Layout from "../components/Layout";
 import Head from "next/head";
 import HomestayCard from "../components/HomestayCard";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function dashboard() {
-  <Head>
-    <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>
-  </Head>;
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getAllHomestay();
+  }, []);
+
+  function getAllHomestay() {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NzEwMzcyNDIsIm5hbWUiOiJqb2hhc2V1bCIsInJvbGUiOiJIb3N0ZXIiLCJ1c2VySWQiOjJ9.XBOI5wg5QmOlafNJqZlafea2wwCKMpt1Fcx3UdOzpmA";
+
+    setLoading(true);
+    axios
+      .get("http://18.143.102.15:8080/homestays", { headers: { Authorization: `Bearer ${token}` } })
+      .then((ress) => {
+        const result = ress.data.data;
+        setData(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  console.log("data", data);
   return (
     <Layout dashboard={"shadow"}>
-      <div className="w-full px-5">
+      <div className="w-full flex flex-col px-5">
         {/* ini awal input */}
         <div className="form-control w-full sticky top-2 z-10">
           <div className="input-group w-full">
@@ -23,39 +48,37 @@ function dashboard() {
         </div>
         {/* ini akhir input */}
         {/* Ini awal Carrousel */}
-        <div className="bg-green-300 mt-5 w-full">
-          <div className="carousel w-full h-64">
-            <div id="item1" className="carousel-item w-full">
-              <img src="https://tse3.mm.bing.net/th?id=OIP.8SSKF5CeIk-RhFsiNUIwagHaEV&pid=Api&P=0" alt="" className="w-full object-cover" />
-            </div>
-            <div id="item2" className="carousel-item w-full">
-              <img src="https://tse4.mm.bing.net/th?id=OIP.ZdITF732zPb6BFuQgNVG4QHaEK&pid=Api&P=0" className="w-full" />
-            </div>
-            <div id="item3" className="carousel-item w-full">
-              <img src="https://placeimg.com/800/200/arch" className="w-full" />
-            </div>
-            <div id="item4" className="carousel-item w-full">
-              <img src="https://placeimg.com/800/200/arch" className="w-full" />
-            </div>
+        <div className=" mt-5 w-full">
+          <div className="carousel w-full h-64 rounded-xl">
+            {data ? (
+              data.map((item) => (
+                <div id={item.id} className="carousel-item w-full">
+                  <div className="grid grid-cols-3">
+                    <img src={item.image1} alt="" className="w-full h-64 object-cover" />
+                    <img src={item.image2} alt="" className="w-full h-64 object-cover" />
+                    <img src={item.image3} alt="" className="w-full h-64 object-cover" />
+                  </div>
+                </div>
+              ))
+            ) : (
+              <></>
+            )}
           </div>
           <div className="flex justify-center w-full py-2 gap-2">
-            <a href="#item1" className="btn btn-xs">
-              O
-            </a>
-            <a href="#item2" className="btn btn-xs">
-              O
-            </a>
-            <a href="#item3" className="btn btn-xs">
-              O
-            </a>
-            <a href="#item4" className="btn btn-xs">
-              O
-            </a>
+            {data ? (
+              data.map((item) => (
+                <a href={`#${item.id}`} className="btn btn-xs">
+                  {item.name}
+                </a>
+              ))
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         {/* Ini akhir Carrousel */}
-        <div className="w-full flex justify-center">
-          <HomestayCard />
+        <div className="w-full justify-center flex flex-col items-center">
+          {data ? data.map((item) => <HomestayCard image1={item.image1} image2={item.image2} image3={item.image3} name={item.name} deskripsi={item.description} harga={item.price_per_night} key={item.id} />) : <></>}
         </div>
       </div>
     </Layout>
