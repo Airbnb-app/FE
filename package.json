@@ -12,10 +12,12 @@
     "@material-tailwind/react": "^1.2.4",
     "axios": "^1.2.1",
     "daisyui": "^2.43.0",
+    "date-fns": "^2.29.3",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
     "next": "13.0.6",
-    "react": "18.2.0",
+    "react": "^18.2.0",
+    "react-date-range": "^1.4.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "tw-elements": "^1.0.0-alpha13"
