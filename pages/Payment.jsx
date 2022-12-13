@@ -1,9 +1,11 @@
 import React from 'react'
 import Layout from '../components/Layout'
+import Navbar from '../components/Navbar'
 
 function Payment() {
   return (
     <Layout>
+      <Navbar namePages="Payment" />
       <div className='w-[90%] bg-[#FBFBFB] flex flex-col items-center justify-center rounded-lg py-6 text-black font-[Poppins]'>
         <form class="w-[90%] ">
           <p className='text-3xl text-pink-airbnb font-bold py-5 '>Credit Card</p>
