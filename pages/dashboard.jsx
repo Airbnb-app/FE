@@ -1,9 +1,9 @@
 import React from "react";
-import Layout from "../component/Layout";
+import Layout from "../components/Layout";
 
 function dashboard() {
   return (
-    <Layout>
+    <Layout dashboard={"shadow"}>
       <div>Ini isi kontent dashboard</div>
     </Layout>
   );
