@@ -4,9 +4,9 @@ import { IconContext } from "react-icons";
 
 function Historycard() {
   return (
-    <div className='w-full bg-[#FBFBFB] flex items-center justify-center rounded-lg pt-6 text-black'>
-      <div className='grid grid-col w-[90%] pt-5'>
-        <p className='text-3xl text-pink-airbnb font-bold py-5'>Bromo Homestay</p>
+    <div className='w-full bg-[#FBFBFB] flex items-center justify-center rounded-lg py-6 text-black'>
+      <div className='grid grid-col w-[90%]'>
+        <p className='text-3xl text-pink-airbnb font-bold pb-5'>Bromo Homestay</p>
         <div className='flex justify-between pt-5'>
           <div className='flex flex-row gap-5'>
             <div className='mr-5'>
@@ -18,7 +18,7 @@ function Historycard() {
               <p className=' text-xl font-semibold'>10-11-2022</p>
             </div>
           </div>
-          <div className='text-xl font-semibold'>
+          <div className='text-xl '>
             <p>10 nights @ $25/night</p>
             <p className='text-end'>Total $250</p>
           </div>
@@ -27,7 +27,7 @@ function Historycard() {
         <div className='pt-5'>
           <form className=''>
             <div className='flex '>
-              <p className=' inline-block align-middle text-xl font-semibold mr-5'>rate your experience :</p>
+              <p className=' inline-block align-middle text-xl  mr-5'>rate your experience :</p>
               <div className='flex items-center'>
                 <IconContext.Provider
                   value={{ color: '#FF5A60', size: '24px' }}
