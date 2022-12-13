@@ -1,9 +1,8 @@
-import Head from 'next/head'
+import Head from "next/head";
 import { Input } from "@material-tailwind/react";
-import Container from '../component/Container'
+import Container from "../components/Container";
 
-
-import React from 'react'
+import React from "react";
 
 const Login = () => {
   return (
@@ -17,7 +16,7 @@ const Login = () => {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet" />
       </Head>
 
-      <div className="relative flex flex-col w-2/4 h-screen bg-cream-airbnb ">        
+      <div className="relative flex flex-col w-2/4 h-screen bg-cream-airbnb ">
         <div className="w-full h-full flex items-center justify-center ">
           <img src="/logo-1.png" alt="" className="w-3/4" />
         </div>
@@ -25,47 +24,29 @@ const Login = () => {
       <div className="flex flex-col w-full h-screen bg-pink-airbnb">
         <div className="flex h-screen justify-center items-center">
           <div className="flex flex-col justify-center w-[450px]">
-            <form
-              className="w-full mx-auto rounded-lg bg-white p-8 px-8 h-[500px]"
-              onSub
-            >
+            <form className="w-full mx-auto rounded-lg bg-white p-8 px-8 h-[500px]" onSub>
               <h2 className="text-[40px] text-center text-pink-airbnb font-bold">Login</h2>
-              <p className="text-[20px] text-center text-black-airbnb font-semibold mt-7 mb-7">
-                Where is Your Next Home?
-              </p>
+              <p className="text-[20px] text-center text-black-airbnb font-semibold mt-7 mb-7">Where is Your Next Home?</p>
               <div className="flex flex-col py-2 mt-5">
-                <Input
-                  variant="outlined"
-                  size="lg"
-                  label="Email"
-                  type="email"
-                  className='text-black-airbnb' />
+                <Input variant="outlined" size="lg" label="Email" type="email" className="text-black-airbnb" />
               </div>
               <div className="flex flex-col py-2 mt-5">
-                <Input 
-                variant="outlined" 
-                size="lg" 
-                label="Password" 
-                type="password" 
-                className='text-black-airbnb' />
+                <Input variant="outlined" size="lg" label="Password" type="password" className="text-black-airbnb" />
               </div>
               <div className="flex justify-end py-2">
                 <a href="">
                   <p className="text-pink-airbnb hover:text-[#E75056]">Sign Up</p>
                 </a>
               </div>
-              <button
-                type="submit"
-                className="w-[90%] flex m-auto mt-6 py-2 bg-pink-airbnb shadow-lg border-none text-white text-[24px] normal-case font-semibold rounded-lg btn hover:bg-[#E75056]"
-              >
+              <button type="submit" className="w-[90%] flex m-auto mt-6 py-2 bg-pink-airbnb shadow-lg border-none text-white text-[24px] normal-case font-semibold rounded-lg btn hover:bg-[#E75056]">
                 Login
               </button>
             </form>
           </div>
         </div>
-      </div>     
+      </div>
     </Container>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
