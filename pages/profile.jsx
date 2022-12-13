@@ -4,7 +4,8 @@ import Layout from "../components/Layout";
 import { CgProfile } from "react-icons/cg";
 import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
-import { CostumInput3 } from "../components/CostumInput";
+import { CostumInput3, CostumInput } from "../components/CostumInput";
+import { RiPencilFill } from "react-icons/ri";
 
 const Profile = () => {
   return (
@@ -19,7 +20,7 @@ const Profile = () => {
           </div>
           <div className="mx-5 mt-8 flex">
             <p>
-              <Modal title={"Upgrade to Hoster"} tombol1={"Cancel"} tombol2={"Upgrade"} inputOne={<CostumInput3 />} />
+              <Modal titleModal={"Upgrade to Hoster"} no={"1"} title={"Upgrade to Hoster"} tombol1={"Cancel"} tombol2={"Upgrade"} inputOne={<CostumInput3 />} />
             </p>
             <p>
               <span className="mx-2">|</span>
@@ -31,7 +32,26 @@ const Profile = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <HomestayCard />
+        <HomestayCard
+          edit={
+            <Modal
+              titleModal={"Edit Homestay Post"}
+              no={"2"}
+              title={
+                <div className="flex flex-col justify-center items-center">
+                  <RiPencilFill />
+                  <p>Edit</p>
+                </div>
+              }
+              inputOne={<CostumInput3 />}
+              tombol1={"Cancel"}
+              tombol2={"Save"}
+              inputTwo={<CostumInput label={"Villa Premium 3"} type={"text"} />}
+              inputThree={<CostumInput label={"Description"} type={"text"} />}
+              inputFour={<CostumInput label={"Price"} type={"number"} />}
+            />
+          }
+        />
       </div>
     </Layout>
   );
