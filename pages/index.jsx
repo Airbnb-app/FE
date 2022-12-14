@@ -54,6 +54,7 @@ const Login = () => {
           setCookie("name", data.name)
           setCookie("token", data.token)
           setCookie("role", data.role)
+          setCookie("user_id",data.id)
           router.push('/dashboard')
         }
       })
