@@ -13,6 +13,7 @@ function dashboard() {
   const [loading, setLoading] = useState(false);
   const [cookie, setCookie, removeCookie] = useCookies();
   const [search, setSearch] = useState("");
+  console.log(data);
 
   const token = cookie.token;
 
@@ -114,7 +115,16 @@ function dashboard() {
         </div>
         {/* Ini akhir Carrousel */}
         <div className="w-full justify-center flex flex-col items-center">
-          {data ? data.map((item) => <HomestayCard image1={item.image1} image2={item.image2} image3={item.image3} name={item.name} deskripsi={item.description} harga={item.price_per_night} key={item.id} />) : <></>}
+          {data ? (
+            data.map((item) => (
+              <HomestayCard address={item.address} owner={item.owner} image1={item.image1} image2={item.image2} image3={item.image3} name={item.name} deskripsi={item.description} harga={item.price_per_night} key={item.id} />
+            ))
+          ) : (
+            <div className="flex flex-col justify-center items-center">
+              <h1 className="text-5xl text-pink-airbnb font-bold">Homestay not found</h1>
+              <p className="text-pink-airbnb font-bold mt-4">please search for other keywords</p>
+            </div>
+          )}
         </div>
       </div>
     </Layout>

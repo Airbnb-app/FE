@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import { Modal1, Modal2 } from "../components/Modal";
 import { CostumInput3, CostumInput } from "../components/CostumInput";
 import { RiPencilFill } from "react-icons/ri";
+import { FaTrashAlt } from "react-icons/fa";
 
 import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
@@ -40,7 +41,7 @@ const Profile = () => {
 
     const body = {
       name: nameHomestay,
-      addres: address,
+      address: address,
       description: description,
       price_per_night: price,
       image1: bodyFormData,
@@ -65,6 +66,7 @@ const Profile = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        getProfile();
       })
       .catch((err) => {
         Swal.fire({
@@ -73,6 +75,36 @@ const Profile = () => {
           text: err,
         });
         console.log(err);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  const deleteHomestay = (id) => {
+    setLoading(true);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${cookie.token}`,
+      },
+    };
+    axios
+      .delete(`http://18.143.102.15:80/homestays/${id}`, config)
+      .then((ress) => {
+        const { message } = ress.data;
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        getProfile();
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err,
+        });
       })
       .finally(() => setLoading(false));
   };
@@ -92,6 +124,7 @@ const Profile = () => {
         "Content-Type": "multipart/form-data",
       },
     };
+
     axios
       .post(`http://18.143.102.15:80/users/upgrade`, bodyFormData, config)
       .then((ress) => {
@@ -103,6 +136,8 @@ const Profile = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        getProfile();
+        setCookie("role", profiledata.role);
       })
       .catch((err) => {
         Swal.fire({
@@ -166,7 +201,7 @@ const Profile = () => {
   console.log(profiledata);
   return (
     <Layout profile={"shadow"} logout={() => logoutHandler()}>
-      <div className="w-full p-5">
+      <div className="w-full px-5">
         <Navbar namePages={"Profile"} />
         <div className="my-5 mx-5 text-pink-airbnb flex justify-start">
           <CgProfile size={100} />
@@ -220,10 +255,21 @@ const Profile = () => {
           {role === "User" ? (
             <div>You Not Hoster</div>
           ) : (
-            <div>
+            <div className=" w-full">
               {profiledata.Homestay
                 ? profiledata.Homestay?.map((item) => (
                     <HomestayCard
+                      onDelete={() => deleteHomestay(item.id)}
+                      delet={
+                        <div>
+                          <div className="flex flex-col items-center justify-center cursor-pointer">
+                            <FaTrashAlt />
+                            <p className="text-xs">Delete</p>
+                          </div>
+                        </div>
+                      }
+                      address={item.address}
+                      owner={cookie.name}
                       name={item.name}
                       image1={item.image1}
                       harga={item.price_per_night}
@@ -232,7 +278,7 @@ const Profile = () => {
                         <label htmlFor={`my-modal-2`} className={`normal-case text-pink-airbnb bg-transparent`}>
                           <div className="flex flex-col items-center justify-center cursor-pointer">
                             <RiPencilFill />
-                            <p>Edit</p>
+                            <p className="text-xs">Edit</p>
                           </div>
                         </label>
                       }

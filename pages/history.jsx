@@ -1,18 +1,17 @@
-import React from 'react'
-import Historycard from '../components/Historycard'
-import Layout from '../components/Layout'
-import Navbar from '../components/Navbar'
-import { useCookies } from "react-cookie"
-import Swal from 'sweetalert2'
-import Router from 'next/router'
-import { useRouter } from "next/router"
-import {useEffect} from "react"
-
+import React from "react";
+import Historycard from "../components/Historycard";
+import Layout from "../components/Layout";
+import Navbar from "../components/Navbar";
+import { useCookies } from "react-cookie";
+import Swal from "sweetalert2";
+import Router from "next/router";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 function history() {
-  const [cookie, setCookie, removeCookie] = useCookies()
+  const [cookie, setCookie, removeCookie] = useCookies();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const logoutHandler = () => {
     Swal.fire({
@@ -37,18 +36,16 @@ function history() {
         removeCookie("role");
         removeCookie("token");
         removeCookie("user_id");
-        Router.push('/');
+        Router.push("/");
       }
-    })
+    });
 
     // useEffect(() => {
     //   if (!cookies.token) {
     //     Router.push("/");
     //   }
     // }, [cookies.token]);
-
-
-  }
+  };
   useEffect(() => {
     if (!cookie.token) {
       router.push("/");
@@ -56,14 +53,11 @@ function history() {
   }, [cookie.token]);
 
   return (
-    <Layout
-      logout={() => logoutHandler()}
-      name={cookie?.name}
-    >
+    <Layout history={"shadow"} logout={() => logoutHandler()} name={cookie?.name}>
       <Navbar namePages="History" />
       <Historycard />
     </Layout>
-  )
+  );
 }
 
-export default history
+export default history;

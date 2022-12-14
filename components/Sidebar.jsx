@@ -5,7 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import Head from "next/head";
 
-const Sidebar = ({ dashboard, profile, history, logout, name}) => {
+const Sidebar = ({ dashboard, profile, history, logout, name }) => {
   return (
     <>
       <Head>
@@ -59,12 +59,12 @@ const Sidebar = ({ dashboard, profile, history, logout, name}) => {
                 </a>
               </div>
             </div>
-            <div className="p-5">
-              <button  className="btn flex justify-center items-center" onClick={logout}>
+            <div className="p-5  flex justify-center items-center">
+              <button className="btn hover:bg-pink-airbnb bg-pink-airbnb border-none normal-case font-normal flex justify-center items-center" onClick={logout}>
                 <div className="text-white text-xl mr-3">
                   <RiLogoutBoxLine />
                 </div>
-                <div className="text-white text-xl" >Logout</div>
+                <div className="text-white text-sm">Logout</div>
               </button>
             </div>
           </div>
