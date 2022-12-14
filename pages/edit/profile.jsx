@@ -2,10 +2,44 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import Navbar from '../../components/Navbar'
 import { CgProfile } from 'react-icons/cg'
+import Swal from 'sweetalert2'
+import Router from 'next/router'
+import { useCookies } from "react-cookie"
 
 const Profile = () => {
+    const [cookie, setCookie, removeCookie] = useCookies();
+
+    const logoutHandler = () => {
+        Swal.fire({
+          title: "Are you sure want to logout?",
+          // text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Yes",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "No",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              text: "Logout successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            removeCookie("name");
+            removeCookie("role");
+            removeCookie("token");
+            removeCookie("user_id");
+            Router.push('/');
+          }
+        })
+    
+      }
+      
     return (
-        <Layout profile={"shadow"}>
+        <Layout profile={"shadow"} logout={()=>logoutHandler()}>
             <Navbar namePages={"Edit Profile"} />
             <div className='h-[500px] bg-white shadow-xl rounded-lg m-5'>
                 <div className='text-pink-airbnb flex justify-center py-5'>

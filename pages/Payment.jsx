@@ -1,10 +1,44 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import Navbar from '../components/Navbar'
+import { useCookies } from "react-cookie"
+import Swal from 'sweetalert2'
+import Router from 'next/router'
 
 function Payment() {
+  const [cookies, setCookie, removeCookie] = useCookies()
+  
+  const logoutHandler = () => {
+    Swal.fire({
+      title: "Are you sure want to logout?",
+      // text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Yes",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          text: "Logout successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        removeCookie("name");
+        removeCookie("role");
+        removeCookie("token");
+        removeCookie("user_id");
+        Router.push('/');
+      }
+    })
+
+  }
   return (
-    <Layout>
+    <Layout 
+    logout={() => logoutHandler()}>
       <Navbar namePages="Payment" />
       <div className='w-[90%] bg-[#FBFBFB] flex flex-col items-center justify-center rounded-lg py-6 text-black font-[Poppins]'>
         <form class="w-[90%] ">
