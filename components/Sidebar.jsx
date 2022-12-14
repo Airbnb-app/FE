@@ -6,7 +6,6 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import Head from "next/head";
 
 const Sidebar = ({ dashboard, profile, history, logout, name}) => {
-
   return (
     <>
       <Head>

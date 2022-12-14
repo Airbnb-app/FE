@@ -17,7 +17,19 @@ const Login = () => {
 
   const router = useRouter()
 
+  // const getDetail = (item, title) => {
+  //   Router.push({
+  //     pathname: `/detail/${title}`,
+  //     query: {
+  //       description: item.description,
+  //       title: item.title,
+  //       image: item.urlToImage,
+  //       content: item.content,
+  //     },
+  //   });
+  // };
 
+//router.query.item
   const loginHandler = async (e) => {
     e.preventDefault();
     const temp = {

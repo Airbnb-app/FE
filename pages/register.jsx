@@ -5,12 +5,15 @@ import Container from '../components/Container'
 import Navbar from '../components/Navbar'
 
 import { useState, useEffect } from 'react'
+import {useRouter} from "next/router"
 import axios from "axios";
 
 function RegisterForm() {
   const [emailReg, setEmailReg] = useState('');
   const [passwordReg, setPasswordReg] = useState('');
   const [nameReg, setNameReg] = useState('');
+
+  const router = useRouter()
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -27,6 +30,7 @@ function RegisterForm() {
       .post('http://18.143.102.15:8080/users', temp)
       .then((response)=> {
         console.log(response)
+        router.push('/')
       })
       .catch(error => {
         console.log(error)
