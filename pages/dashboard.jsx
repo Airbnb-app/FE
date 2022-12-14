@@ -5,8 +5,8 @@ import HomestayCard from "../components/HomestayCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import Swal from 'sweetalert2'
-import Router from 'next/router'
+import Swal from "sweetalert2";
+import Router from "next/router";
 
 function dashboard() {
   const [data, setData] = useState();
@@ -27,7 +27,7 @@ function dashboard() {
   function searchHomestay() {
     setLoading(true);
     axios
-      .get(`http://18.143.102.15:8080/homestays/?name=${search}`, { headers: { Authorization: `Bearer ${token}` } })
+      .get(`http://18.143.102.15:80/homestays/?name=${search}`, { headers: { Authorization: `Bearer ${token}` } })
       .then((ress) => {
         const result = ress.data.data;
         setData(result);
@@ -39,7 +39,7 @@ function dashboard() {
         setLoading(false);
       });
   }
-  
+
   const logoutHandler = () => {
     Swal.fire({
       title: "Are you sure want to logout?",
@@ -63,14 +63,13 @@ function dashboard() {
         removeCookie("role");
         removeCookie("token");
         removeCookie("user_id");
-        Router.push('/');
+        Router.push("/");
       }
-    })
-
-  }
+    });
+  };
 
   return (
-    <Layout dashboard={"shadow"} logout={()=>logoutHandler()}>
+    <Layout dashboard={"shadow"} logout={() => logoutHandler()}>
       <div className="w-full flex flex-col px-5">
         {/* ini awal input */}
         <div className="form-control w-full sticky top-2 z-10">
