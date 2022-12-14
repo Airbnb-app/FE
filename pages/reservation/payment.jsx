@@ -1,13 +1,14 @@
 import React from 'react'
-import Layout from '../components/Layout'
-import Navbar from '../components/Navbar'
+import Layout from '../../components/Layout'
+import Navbar from '../../components/Navbar'
 import { useCookies } from "react-cookie"
 import Swal from 'sweetalert2'
 import Router from 'next/router'
+import {useEffect} from 'react'
 
 function Payment() {
   const [cookies, setCookie, removeCookie] = useCookies()
-  
+
   const logoutHandler = () => {
     Swal.fire({
       title: "Are you sure want to logout?",
@@ -35,10 +36,23 @@ function Payment() {
       }
     })
 
+    useEffect(() => {
+      if (!cookie.token) {
+        router.push("/");
+      }
+    }, [cookie.token]);
+
   }
+
+  useEffect(() => {
+    if (!cookies.token) {
+      Router.push("/");
+    }
+  }, [cookies.token]);
+
   return (
-    <Layout 
-    logout={() => logoutHandler()}>
+    <Layout
+      logout={() => logoutHandler()}>
       <Navbar namePages="Payment" />
       <div className='w-[90%] bg-[#FBFBFB] flex flex-col items-center justify-center rounded-lg py-6 text-black font-[Poppins]'>
         <form class="w-[90%] ">
