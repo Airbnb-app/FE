@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar'
 import { useState, useEffect } from 'react'
 import {useRouter} from "next/router"
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 function RegisterForm() {
   const [emailReg, setEmailReg] = useState('');
@@ -23,9 +24,10 @@ function RegisterForm() {
       email: emailReg,
       password: passwordReg
     }
-    await console.log(nameReg)
-    await console.log(emailReg)
-    await console.log(passwordReg)
+    console.log(nameReg)
+    console.log(emailReg)
+    console.log(passwordReg)
+    await 
     axios
       .post('http://18.143.102.15:8080/users', temp)
       .then((response)=> {
@@ -36,7 +38,16 @@ function RegisterForm() {
         console.log(error)
       })
   }
-
+  const swalSignUp = () =>{
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          text: "Signup successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push('/');
+  }
   return (
     <Container>
       <Head>
@@ -64,7 +75,7 @@ function RegisterForm() {
                   </label>
                 </div>
                 <div class="md:w-[75%]">
-                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-full-name" type="text" placeholder='your name here' onChange={(e)=>{setNameReg(e.target.value)}}/>
+                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-full-name" type="text" placeholder='Your name here' onChange={(e)=>{setNameReg(e.target.value)}}/>
                 </div>
               </div>
               <div class="md:flex md:items-center mb-6">
@@ -74,7 +85,7 @@ function RegisterForm() {
                   </label>
                 </div>
                 <div class="md:w-[75%]">
-                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-email" type="text" placeholder='your email here' onChange={(e)=>{setEmailReg(e.target.value)}}/>
+                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-email" type="email" placeholder='Your email here' onChange={(e)=>{setEmailReg(e.target.value)}}/>
                 </div>
               </div>
               <div class="md:flex md:items-center mb-6">
@@ -84,11 +95,11 @@ function RegisterForm() {
                   </label>
                 </div>
                 <div class="md:w-[75%]">
-                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-password" type="text" placeholder='********' onChange={(e)=>{setPasswordReg(e.target.value)}}/>
+                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-password" type="password" placeholder='Your password here' onChange={(e)=>{setPasswordReg(e.target.value)}}/>
                 </div>
               </div>
               <div class="md:flex md:items-center flex justify-end">
-                <button class="shadow bg-pink-airbnb hover:bg-[#DF5A60] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded" type="submit" href="/">
+                <button class="shadow bg-pink-airbnb hover:bg-[#DF5A60] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded" type="submit" onClick={()=>swalSignUp()}>
                   Sign Up
                 </button>
               </div>
