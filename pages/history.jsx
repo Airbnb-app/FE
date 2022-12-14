@@ -32,6 +32,7 @@ function history() {
         removeCookie("name");
         removeCookie("role");
         removeCookie("token");
+        removeCookie("user_id");
         Router.push('/');
       }
     })

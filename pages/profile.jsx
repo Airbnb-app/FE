@@ -10,11 +10,13 @@ import { RiPencilFill } from "react-icons/ri";
 import { useState, useEffect } from 'react'
 import { useCookies } from "react-cookie"
 import axios from "axios";
+import Swal from 'sweetalert2'
+import Router from 'next/router'
 
 
 const Profile = () => {
-  const [profiledata, setProfileData] = useState({}); 
-  const [cookie, setCookie] = useCookies(); 
+  const [profiledata, setProfileData] = useState({});
+  const [cookie, setCookie, removeCookie] = useCookies();
 
   const getProfile = async () => {
     const config = {
@@ -35,13 +37,42 @@ const Profile = () => {
       .catch((error) => console.log(error))
   }
 
-  
+
   useEffect(() => {
     getProfile();
   }, []);
 
+  const logoutHandler = () => {
+    Swal.fire({
+      title: "Are you sure want to logout?",
+      // text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Yes",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          text: "Logout successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        removeCookie("name");
+        removeCookie("role");
+        removeCookie("token");
+        removeCookie("user_id");
+        Router.push('/');
+      }
+    })
+
+  }
+
   return (
-    <Layout profile={"shadow"}>
+    <Layout profile={"shadow"} logout={()=>logoutHandler()}>
       <Navbar namePages={"Profile"} />
       <div className="my-5 mx-5 text-pink-airbnb flex justify-start">
         <CgProfile size={100} />
