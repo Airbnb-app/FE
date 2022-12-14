@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import Head from "next/head";
 
-const Layout = ({ children, dashboard, profile, history }) => {
+const Layout = ({ children, dashboard, profile, history, logout, name }) => {
   return (
     <div className="bg-cream-airbnb">
       <Head>
@@ -14,7 +14,7 @@ const Layout = ({ children, dashboard, profile, history }) => {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet" />
       </Head>
       <div className="grid grid-cols-6 h-screen ">
-        <Sidebar dashboard={dashboard} profile={profile} history={history} />
+        <Sidebar dashboard={dashboard} profile={profile} history={history} logout={logout} name={name}/>
         <div className="col-span-5 overflow-auto p-5">{children}</div>
       </div>
     </div>

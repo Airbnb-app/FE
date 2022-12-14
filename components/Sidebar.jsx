@@ -5,17 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import Head from "next/head";
 
-import { useCookies } from "react-cookie";
-
-const Sidebar = ({ dashboard, profile, history }) => {
-  const [cookies, setCookie, removeCookie] = useCookies();
-
-  const logoutHandler = () => {
-    removeCookie("name");
-    removeCookie("role");
-    removeCookie("token");
-  };
-
+const Sidebar = ({ dashboard, profile, history, logout, name}) => {
   return (
     <>
       <Head>
@@ -38,7 +28,7 @@ const Sidebar = ({ dashboard, profile, history }) => {
             <div className="text-7xl text-white">
               <CgProfile />
             </div>
-            <div className="text-white text-2xl font-bold">John Doe</div>
+            <div className="text-white text-2xl font-bold">{name}</div>
           </div>
           <div className="flex flex-col justify-between h-3/4  ">
             <div className="pt-10 flex justify-center">
@@ -70,12 +60,12 @@ const Sidebar = ({ dashboard, profile, history }) => {
               </div>
             </div>
             <div className="p-5">
-              <a href="/" className="flex justify-center items-center" onClick={() => logoutHandler()}>
+              <button  className="btn flex justify-center items-center" onClick={logout}>
                 <div className="text-white text-xl mr-3">
                   <RiLogoutBoxLine />
                 </div>
-                <div className="text-white text-xl">Logout</div>
-              </a>
+                <div className="text-white text-xl" >Logout</div>
+              </button>
             </div>
           </div>
         </div>
