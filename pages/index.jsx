@@ -32,12 +32,17 @@ const Login = () => {
         setCookie("name", response.data.data.name)
         setCookie("token", response.data.data.token)
         setCookie("role", response.data.data.role)
+        setCookie("user_id",response.data.data.id)
         router.push('/dashboard')
       })
       .catch(error => {
         console.log(error)
       })
   }
+
+  
+
+
 
   return (
     <Container>
