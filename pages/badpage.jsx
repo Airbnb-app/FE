@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import Router from 'next/router'
 
-const NotFound = () => {
+const Badpage = () => {
     return (
         <div className="h-screen w-full flex flex-col justify-center items-center bg-pink-airbnb">
             <Head>
@@ -18,14 +18,14 @@ const NotFound = () => {
                 Page Not Found
             </div >
             <div className='text-white text-xl text-center'>
-                <p>We're sorry, the page you are looking doesn't exist or an other error occurred. <br /> Please go back or contact us 08123456789.</p>
+                <p>We're sorry, the page you are looking doesn't appear, <br /> you must login first. Hit the button bellow.</p>
             </div>
-            <button className="mt-5" onClick={()=>Router.back()} >
+            <button className="mt-5" onClick={() => Router.push(`/`)} >
                 <a
                     className="relative inline-block text-sm font-medium text-black-airbnb group focus:outline-none focus:ring"
                 >
                     <span className="relative block px-8 py-3 bg-cream-airbnb border-none rounded-lg hover:bg-[#FFCBB6]">
-                        Go Back
+                        Go to Login
                     </span>
                 </a>
             </button>
@@ -33,4 +33,4 @@ const NotFound = () => {
     )
 }
 
-export default NotFound
+export default Badpage
