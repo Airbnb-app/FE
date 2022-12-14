@@ -5,6 +5,7 @@ import HomestayCard from "../components/HomestayCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useRouter } from "next/router"
 
 function dashboard() {
   const [data, setData] = useState();
@@ -13,6 +14,7 @@ function dashboard() {
   const [search, setSearch] = useState("");
 
   const token = cookie.token;
+  const router = useRouter()
 
   useEffect(() => {
     searchHomestay();
@@ -37,6 +39,12 @@ function dashboard() {
         setLoading(false);
       });
   }
+
+  useEffect(() => {
+    if (!cookie.token) {
+      router.push("/");
+    }
+  }, [cookie.token]);
 
   return (
     <Layout dashboard={"shadow"}>
