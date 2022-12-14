@@ -1,19 +1,19 @@
-import React from 'react'
-import Layout from '../components/Layout'
-import Head from 'next/head'
-import Container from '../components/Container'
-import Navbar from '../components/Navbar'
+import React from "react";
+import Layout from "../components/Layout";
+import Head from "next/head";
+import Container from "../components/Container";
+import Navbar from "../components/Navbar";
 
-import { useState, useEffect } from 'react'
-import {useRouter} from "next/router"
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
 
 function RegisterForm() {
-  const [emailReg, setEmailReg] = useState('');
-  const [passwordReg, setPasswordReg] = useState('');
-  const [nameReg, setNameReg] = useState('');
+  const [emailReg, setEmailReg] = useState("");
+  const [passwordReg, setPasswordReg] = useState("");
+  const [nameReg, setNameReg] = useState("");
 
-  const router = useRouter()
+  const router = useRouter();
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -21,21 +21,21 @@ function RegisterForm() {
       name: nameReg,
       role: "User",
       email: emailReg,
-      password: passwordReg
-    }
-    await console.log(nameReg)
-    await console.log(emailReg)
-    await console.log(passwordReg)
+      password: passwordReg,
+    };
+    await console.log(nameReg);
+    await console.log(emailReg);
+    await console.log(passwordReg);
     axios
-      .post('http://18.143.102.15:8080/users', temp)
-      .then((response)=> {
-        console.log(response)
-        router.push('/')
+      .post("http://18.143.102.15:80/users", temp)
+      .then((response) => {
+        console.log(response);
+        router.push("/");
       })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <Container>
@@ -48,14 +48,13 @@ function RegisterForm() {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet" />
       </Head>
 
-      <div className='grid grid-cols-4 w-full h-screen'>
-
-        <div className='col-span-1 bg-pink-airbnb w-full h-full flex items-center justify-center'>
+      <div className="grid grid-cols-4 w-full h-screen">
+        <div className="col-span-1 bg-pink-airbnb w-full h-full flex items-center justify-center">
           <img src="/logo-2.png" alt="" className="w-3/4" />
         </div>
-        <div className='col-span-3'>
+        <div className="col-span-3">
           <Navbar namePages="Register" />
-          <div className='w-[90%] bg-[#FBFBFB] flex items-center justify-center rounded-lg m-6 p-6 '>
+          <div className="w-[90%] bg-[#FBFBFB] flex items-center justify-center rounded-lg m-6 p-6 ">
             <form class="w-[90%] justify-center items-center align-middle" onSubmit={(e) => registerHandler(e)}>
               <div class="md:flex md:items-center mb-6">
                 <div class="md:w-[25%]">
@@ -64,7 +63,15 @@ function RegisterForm() {
                   </label>
                 </div>
                 <div class="md:w-[75%]">
-                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-full-name" type="text" placeholder='your name here' onChange={(e)=>{setNameReg(e.target.value)}}/>
+                  <input
+                    class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14"
+                    id="inline-full-name"
+                    type="text"
+                    placeholder="your name here"
+                    onChange={(e) => {
+                      setNameReg(e.target.value);
+                    }}
+                  />
                 </div>
               </div>
               <div class="md:flex md:items-center mb-6">
@@ -74,7 +81,15 @@ function RegisterForm() {
                   </label>
                 </div>
                 <div class="md:w-[75%]">
-                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-email" type="text" placeholder='your email here' onChange={(e)=>{setEmailReg(e.target.value)}}/>
+                  <input
+                    class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14"
+                    id="inline-email"
+                    type="text"
+                    placeholder="your email here"
+                    onChange={(e) => {
+                      setEmailReg(e.target.value);
+                    }}
+                  />
                 </div>
               </div>
               <div class="md:flex md:items-center mb-6">
@@ -84,7 +99,15 @@ function RegisterForm() {
                   </label>
                 </div>
                 <div class="md:w-[75%]">
-                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-password" type="text" placeholder='********' onChange={(e)=>{setPasswordReg(e.target.value)}}/>
+                  <input
+                    class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14"
+                    id="inline-password"
+                    type="text"
+                    placeholder="********"
+                    onChange={(e) => {
+                      setPasswordReg(e.target.value);
+                    }}
+                  />
                 </div>
               </div>
               <div class="md:flex md:items-center flex justify-end">
@@ -95,12 +118,9 @@ function RegisterForm() {
             </form>
           </div>
         </div>
-
       </div>
-
     </Container>
-
-  )
+  );
 }
 
-export default RegisterForm
+export default RegisterForm;

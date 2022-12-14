@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { Input } from "@material-tailwind/react";
-import { useState, useEffect } from 'react'
-import { useCookies } from "react-cookie"
-import { useRouter } from "next/router"
+import { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 
 import Container from "../components/Container";
@@ -11,11 +11,11 @@ import axios from "axios";
 import React from "react";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [cookie, setCookie] = useCookies();
 
-  const router = useRouter()
+  const router = useRouter();
 
   // const getDetail = (item, title) => {
   //   Router.push({
@@ -29,20 +29,20 @@ const Login = () => {
   //   });
   // };
 
-//router.query.item
+  //router.query.item
   const loginHandler = async (e) => {
     e.preventDefault();
     const temp = {
       email: email,
-      password: password
-    }
-    await console.log(email)
-    await console.log(password)
+      password: password,
+    };
+    await console.log(email);
+    await console.log(password);
     axios
-      .post('http://18.143.102.15:8080/login', temp)
+      .post("http://18.143.102.15:80/login", temp)
       .then((response) => {
-        console.log("hasil respon: ", response.data.data)
-        const { data } = response.data
+        console.log("hasil respon: ", response.data.data);
+        const { data } = response.data;
         if (data) {
           Swal.fire({
             position: "center",
@@ -51,23 +51,23 @@ const Login = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          setCookie("name", data.name)
-          setCookie("token", data.token)
-          setCookie("role", data.role)
-          setCookie("user_id",data.id)
-          router.push('/dashboard')
+          setCookie("name", data.name);
+          setCookie("token", data.token);
+          setCookie("role", data.role);
+          setCookie("user_id", data.id);
+          router.push("/dashboard");
         }
       })
-      .catch(error => {
-        console.log(error)
+      .catch((error) => {
+        console.log(error);
         Swal.fire({
           position: "center",
           icon: "error",
           title: "Email or Password incorrect",
           showConfirmButton: true,
+        });
       });
-      })
-  }
+  };
 
   return (
     <Container>
@@ -92,18 +92,38 @@ const Login = () => {
               <h2 className="text-[40px] text-center text-pink-airbnb font-bold">Login</h2>
               <p className="text-[20px] text-center text-black-airbnb font-semibold mt-7 mb-7">Where is Your Next Home?</p>
               <div className="flex flex-col py-2 mt-5">
-                <Input variant="outlined" size="lg" label="Email" type="email" className="text-black-airbnb" onChange={(e) => { setEmail(e.target.value) }} value={email} />
+                <Input
+                  variant="outlined"
+                  size="lg"
+                  label="Email"
+                  type="email"
+                  className="text-black-airbnb"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  value={email}
+                />
                 {/*   */}
               </div>
               <div className="flex flex-col py-2 mt-5">
-                <Input variant="outlined" size="lg" label="Password" type="password" className="text-black-airbnb" onChange={(e) => { setPassword(e.target.value) }} value={password} />
+                <Input
+                  variant="outlined"
+                  size="lg"
+                  label="Password"
+                  type="password"
+                  className="text-black-airbnb"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                  value={password}
+                />
               </div>
               <div className="flex justify-end py-2">
                 <a href="/register">
                   <p className="text-pink-airbnb hover:text-[#E75056]">Sign Up</p>
                 </a>
               </div>
-              <button type="submit" className="w-[90%] flex m-auto mt-6 py-2 bg-pink-airbnb shadow-lg border-none text-white text-[24px] normal-case font-semibold rounded-lg btn hover:bg-[#E75056]" >
+              <button type="submit" className="w-[90%] flex m-auto mt-6 py-2 bg-pink-airbnb shadow-lg border-none text-white text-[24px] normal-case font-semibold rounded-lg btn hover:bg-[#E75056]">
                 Login
               </button>
             </form>
