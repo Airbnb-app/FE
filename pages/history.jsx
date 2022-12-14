@@ -5,10 +5,14 @@ import Navbar from '../components/Navbar'
 import { useCookies } from "react-cookie"
 import Swal from 'sweetalert2'
 import Router from 'next/router'
+import { useRouter } from "next/router"
+import {useEffect} from "react"
 
 
 function history() {
-  const [cookies, setCookie, removeCookie] = useCookies()
+  const [cookie, setCookie, removeCookie] = useCookies()
+
+  const router = useRouter()
 
   const logoutHandler = () => {
     Swal.fire({
@@ -37,12 +41,25 @@ function history() {
       }
     })
 
+    // useEffect(() => {
+    //   if (!cookies.token) {
+    //     Router.push("/");
+    //   }
+    // }, [cookies.token]);
+
+
   }
+  useEffect(() => {
+    if (!cookie.token) {
+      router.push("/");
+    }
+  }, [cookie.token]);
+
   return (
     <Layout
       logout={() => logoutHandler()}
-      // name={cookies.name}
-      >
+      name={cookie?.name}
+    >
       <Navbar namePages="History" />
       <Historycard />
     </Layout>
