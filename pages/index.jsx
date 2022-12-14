@@ -2,6 +2,8 @@ import Head from "next/head";
 import { Input } from "@material-tailwind/react";
 import { useState, useEffect } from 'react'
 import { useCookies } from "react-cookie"
+import {useRouter} from "next/router"
+
 import Container from "../components/Container";
 import axios from "axios";
 
@@ -11,6 +13,9 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cookie, setCookie] = useCookies();
+
+  const router = useRouter()
+
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -27,8 +32,7 @@ const Login = () => {
         setCookie("name", response.data.data.name)
         setCookie("token", response.data.data.token)
         setCookie("role", response.data.data.role)
-        // cookie ? 
-        // navigate('/')
+        router.push('/dashboard')
       })
       .catch(error => {
         console.log(error)
@@ -65,7 +69,7 @@ const Login = () => {
                 <Input variant="outlined" size="lg" label="Password" type="password" className="text-black-airbnb" onChange={(e) => {setPassword(e.target.value)}} value={password}/>
               </div>
               <div className="flex justify-end py-2">
-                <a href="">
+                <a href="/register">
                   <p className="text-pink-airbnb hover:text-[#E75056]">Sign Up</p>
                 </a>
               </div>

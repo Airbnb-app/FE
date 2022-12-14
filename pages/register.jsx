@@ -4,7 +4,35 @@ import Head from 'next/head'
 import Container from '../components/Container'
 import Navbar from '../components/Navbar'
 
+import { useState, useEffect } from 'react'
+import axios from "axios";
+
 function RegisterForm() {
+  const [emailReg, setEmailReg] = useState('');
+  const [passwordReg, setPasswordReg] = useState('');
+  const [nameReg, setNameReg] = useState('');
+
+  const registerHandler = async (e) => {
+    e.preventDefault();
+    const temp = {
+      name: nameReg,
+      role: "User",
+      email: emailReg,
+      password: passwordReg
+    }
+    await console.log(nameReg)
+    await console.log(emailReg)
+    await console.log(passwordReg)
+    axios
+      .post('http://18.143.102.15:8080/users', temp)
+      .then((response)=> {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   return (
     <Container>
       <Head>
@@ -24,7 +52,7 @@ function RegisterForm() {
         <div className='col-span-3'>
           <Navbar namePages="Register" />
           <div className='w-[90%] bg-[#FBFBFB] flex items-center justify-center rounded-lg m-6 p-6 '>
-            <form class="w-[90%] justify-center items-center align-middle">
+            <form class="w-[90%] justify-center items-center align-middle" onSubmit={(e) => registerHandler(e)}>
               <div class="md:flex md:items-center mb-6">
                 <div class="md:w-[25%]">
                   <label class="block text-pink-airbnb font-semibold text-2xl md:text-left mb-1 md:mb-0 pr-4" for="inline-full-name">
@@ -32,7 +60,7 @@ function RegisterForm() {
                   </label>
                 </div>
                 <div class="md:w-[75%]">
-                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-full-name" type="text" placeholder='your name here' />
+                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-full-name" type="text" placeholder='your name here' onChange={(e)=>{setNameReg(e.target.value)}}/>
                 </div>
               </div>
               <div class="md:flex md:items-center mb-6">
@@ -42,7 +70,7 @@ function RegisterForm() {
                   </label>
                 </div>
                 <div class="md:w-[75%]">
-                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-email" type="text" placeholder='your email here' />
+                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-email" type="text" placeholder='your email here' onChange={(e)=>{setEmailReg(e.target.value)}}/>
                 </div>
               </div>
               <div class="md:flex md:items-center mb-6">
@@ -52,11 +80,11 @@ function RegisterForm() {
                   </label>
                 </div>
                 <div class="md:w-[75%]">
-                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-password" type="text" placeholder='********' />
+                  <input class="bg-gray-200 appearance-none border-2 border-[#D9D9D9] rounded-2xl  w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-pink-airbnb h-14" id="inline-password" type="text" placeholder='********' onChange={(e)=>{setPasswordReg(e.target.value)}}/>
                 </div>
               </div>
               <div class="md:flex md:items-center flex justify-end">
-                <button class="shadow bg-pink-airbnb hover:bg-[#DF5A60] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded" type="button">
+                <button class="shadow bg-pink-airbnb hover:bg-[#DF5A60] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded" type="submit" href="/">
                   Sign Up
                 </button>
               </div>
