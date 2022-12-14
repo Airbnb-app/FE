@@ -5,17 +5,16 @@ import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import Head from "next/head";
 
-import { useCookies } from "react-cookie"
+import { useCookies } from "react-cookie";
 
 const Sidebar = ({ dashboard, profile, history }) => {
+  const [cookies, setCookie, removeCookie] = useCookies();
 
-  const [cookies, setCookie, removeCookie] = useCookies()
-
-  const logoutHandler = ()=> {
-    removeCookie("name")
-    removeCookie("role")
-    removeCookie("token")
-  }
+  const logoutHandler = () => {
+    removeCookie("name");
+    removeCookie("role");
+    removeCookie("token");
+  };
 
   return (
     <>
