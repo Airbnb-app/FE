@@ -7,7 +7,39 @@ import { Modal1, Modal2 } from "../components/Modal";
 import { CostumInput3, CostumInput } from "../components/CostumInput";
 import { RiPencilFill } from "react-icons/ri";
 
+import { useState, useEffect } from 'react'
+import { useCookies } from "react-cookie"
+import axios from "axios";
+
+
 const Profile = () => {
+  const [profiledata, setProfileData] = useState({}); 
+  const [cookie, setCookie] = useCookies(); 
+
+  const getProfile = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${cookie.token
+          }`
+      }
+    };
+
+    axios
+      .get(
+        `http://18.143.102.15:8080/users`,
+        config
+      )
+      .then((response) => {
+        setProfileData(response.data.data)
+      })
+      .catch((error) => console.log(error))
+  }
+
+  
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   return (
     <Layout profile={"shadow"}>
       <Navbar namePages={"Profile"} />
@@ -15,8 +47,8 @@ const Profile = () => {
         <CgProfile size={100} />
         <div className="flex justify-between w-full">
           <div className="ml-10">
-            <p className="text-black-airbnb mt-3 w-24 font-bold">Nama: </p>
-            <p className="text-black-airbnb mt-3 font-bold">Email: </p>
+            <p className="text-black-airbnb mt-3 w-24 font-bold">Nama: {profiledata.name}</p>
+            <p className="text-black-airbnb mt-3 font-bold">Email: {profiledata.email}</p>
           </div>
           <div className="mx-5 mt-8 flex">
             <div>
