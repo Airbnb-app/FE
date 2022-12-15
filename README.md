@@ -1,36 +1,44 @@
-Group 2 Project 3: Airbnb App Project
+## About Project
 
--Aziz Wahyudin (BE)
--Yusnar Setiyadi (BE)
--Wendy Prasna (FE)
--Aryo Yudhanto (FE)
--Achmad Maulana Achsan {FE}
+Airbnb dimulai pada tahun 2008 saat dua desainer yang memiliki tempat menerima tiga wisatawan yang membutuhkan tempat menginap. Kini, jutaan Tuan Rumah dan tamu telah membuat akun Airbnb gratis untuk menikmati pandangan unik tentang dunia masing-masing.
 
-Link organizations: https://github.com/GP-3-Kelompok-2
-Link repo BE: https://github.com/GP-3-Kelompok-2/BE
-Link repo BE: https://github.com/GP-3-Kelompok-2/FE
+* Group 2 Project 3: Airbnb App Project
 
-Tools:
--NextJS
--Tailwind
--DaisyUI
--Axios
--React Icons
--Material Tailwind
+1. Aziz Wahyudin (BE) 
+2. Yusnar Setiyadi (BE) 
+3. Wendy Prasna (FE) 
+4. Aryo Yudhanto (FE) 
+5. Achmad Maulana Achsan {FE} 
 
+### Built With
 
+* NextJS
+* Tailwind
+* DaisyUI
+* Axios
+* React Icons
+* react-cookie
+* Material Tailwind
+* Sweetalert2
+* react-date-range
+* Tw-elements
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
+1. Clone repo:
+```sh
+   git clone https://github.com/GP-3-Kelompok-2/FE
+   ```
+2. Install package
+```sh
+   npm install
+   ```
+3. Run development server
+```sh
+   npm run dev
+   ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
