@@ -17,6 +17,8 @@ function history() {
   const [rating, setRating] = useState('');
   const [feedback, setFeedback] = useState('');
 
+  const [idstate, setIdState] = useState();
+  
   const [name, setName] = useState()
 
   useEffect(() => {
@@ -72,6 +74,9 @@ function history() {
       .then((response) => {
         console.log(response)
         setHistoryData(response.data.data)
+        console.log(response.data.data.homestay_id)
+        // const {homestay_id} = response.data.data;
+        // setIdState(homestay_id)
       })
       .catch((error) => console.log(error))
   }
@@ -84,7 +89,7 @@ function history() {
     axios
       .post('https://numpangtidur.my.id/feedbacks',
         {
-          homestay_id: 4,
+          homestay_id: idstate,
           rating: rating,
           feedback: feedback,
         },
@@ -92,6 +97,7 @@ function history() {
       )
       .then((response) => {
         console.log(response)
+        console.log(idstate)
       })
       .catch(error => {
         console.log(error)
@@ -122,6 +128,7 @@ function history() {
                 start_date={item.start_date}
                 end_date={item.end_date}
                 total_price={item.total_price}
+                giveId={()=>{setIdState(item.homestay_id)}}
                 submitButton={(e) => postFeedback(e)}
                 onChangeFeedback={(e) => { setFeedback(e.target.value) }}
                 rate1={() => setRating("1")}
@@ -135,19 +142,7 @@ function history() {
         ) : (
           <></>
         )}
-        <Historycard
-          homestay_name={"aasfasdf"}
-          start_date={"abc"}
-          end_date={"abc"}
-          total_price={"abc"}
-          submitButton={(e) => postFeedback(e)}
-          onChangeFeedback={(e) => { setFeedback(e.target.value) }}
-          rate1={() => setRating("1")}
-          rate2={() => setRating("2")}
-          rate3={() => setRating("3")}
-          rate4={() => setRating("4")}
-          rate5={() => setRating("5")}
-        />
+        
       </div>
 
 
