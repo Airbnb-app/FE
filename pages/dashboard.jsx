@@ -124,16 +124,18 @@ function dashboard() {
               <></>
             )}
           </div>
-          <div className="flex justify-center w-full overflow-auto py-2 gap-2">
-            {data ? (
-              data.map((item) => (
-                <a href={`#${item.id}`} className="btn text-white btn-xs hover:bg-white hover:text-pink-airbnb bg-pink-airbnb border-none">
-                  {item.name}
-                </a>
-              ))
-            ) : (
-              <></>
-            )}
+          <div className=" w-full  ">
+            <div className="overflow-auto py-2 gap-2 w-full flex flex-wrap justify-center">
+              {data ? (
+                data.map((item) => (
+                  <a href={`#${item.id}`} className="btn text-white btn-xs hover:bg-white hover:text-pink-airbnb bg-pink-airbnb border-none">
+                    {item.name}
+                  </a>
+                ))
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </div>
         {/* Ini akhir Carrousel */}
