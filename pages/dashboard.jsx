@@ -5,14 +5,15 @@ import HomestayCard from "../components/HomestayCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import Swal from 'sweetalert2'
-import Router from 'next/router'
+import Swal from "sweetalert2";
+import Router from "next/router";
 
 function dashboard() {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [cookie, setCookie, removeCookie] = useCookies();
   const [search, setSearch] = useState("");
+  console.log(data);
 
   const token = cookie.token;
 
@@ -27,7 +28,7 @@ function dashboard() {
   function searchHomestay() {
     setLoading(true);
     axios
-      .get(`http://18.143.102.15:8080/homestays/?name=${search}`, { headers: { Authorization: `Bearer ${token}` } })
+      .get(`http://18.143.102.15:80/homestays/?name=${search}`, { headers: { Authorization: `Bearer ${token}` } })
       .then((ress) => {
         const result = ress.data.data;
         setData(result);
@@ -39,7 +40,24 @@ function dashboard() {
         setLoading(false);
       });
   }
-  
+
+  const getReserve = (item, title) => {
+    Router.push({
+      pathname: `/reservation/${title}`,
+      query: {
+        address: item.address,
+        owner: item.owner,
+        image1: item.image1,
+        image2: item.image2,
+        image3: item.image3,
+        name: item.name,
+        deskripsi: item.description,
+        harga: item.price_per_night,
+        id: item.id,
+      },
+    });
+  };
+
   const logoutHandler = () => {
     Swal.fire({
       title: "Are you sure want to logout?",
@@ -63,14 +81,13 @@ function dashboard() {
         removeCookie("role");
         removeCookie("token");
         removeCookie("user_id");
-        Router.push('/');
+        Router.push("/");
       }
-    })
-
-  }
+    });
+  };
 
   return (
-    <Layout dashboard={"shadow"} logout={()=>logoutHandler()}>
+    <Layout dashboard={"shadow"} logout={() => logoutHandler()}>
       <div className="w-full flex flex-col px-5">
         {/* ini awal input */}
         <div className="form-control w-full sticky top-2 z-10">
@@ -115,7 +132,26 @@ function dashboard() {
         </div>
         {/* Ini akhir Carrousel */}
         <div className="w-full justify-center flex flex-col items-center">
-          {data ? data.map((item) => <HomestayCard image1={item.image1} image2={item.image2} image3={item.image3} name={item.name} deskripsi={item.description} harga={item.price_per_night} key={item.id} />) : <></>}
+          {data ? (
+            data.map((item) => (
+              <HomestayCard
+                address={item.address}
+                owner={item.owner}
+                image1={item.image1}
+                image2={item.image2}
+                image3={item.image3}
+                name={item.name}
+                deskripsi={item.description}
+                harga={item.price_per_night}
+                key={item.id} 
+                toReserve={() => getReserve(item, item.name)}/>
+            ))
+          ) : (
+            <div className="flex flex-col justify-center items-center">
+              <h1 className="text-5xl text-pink-airbnb font-bold">Homestay not found</h1>
+              <p className="text-pink-airbnb font-bold mt-4">please search for other keywords</p>
+            </div>
+          )}
         </div>
       </div>
     </Layout>

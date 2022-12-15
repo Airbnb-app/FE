@@ -6,9 +6,21 @@ import DateRangeComp from '../../components/DateRangeComp'
 import Swal from 'sweetalert2'
 import Router from 'next/router'
 import { useCookies } from "react-cookie"
+import { useRouter} from 'next/router'
 
 const Homestay = () => {
   const [cookie, setCookie, removeCookie] = useCookies();
+  const router = useRouter()
+
+  console.log("cek router address: ",router.query.address)
+  console.log("cek router owner: ",router.query.owner)
+  console.log("cek router image: ",router.query.image1)
+  console.log("cek router image: ",router.query.image2)
+  console.log("cek router image: ",router.query.image3)
+  console.log("cek router nama: ",router.query.name)
+  console.log("cek router desk: ",router.query.description)
+  console.log("cek router harga: ",router.query.price_per_night)
+  console.log("cek router id: ",router.query.id)
 
   const logoutHandler = () => {
     Swal.fire({
@@ -43,14 +55,22 @@ const Homestay = () => {
     <Layout dashboard={"shadow"} logout={()=>logoutHandler()}>
       <Navbar namePages={"Reservation "} />
       <div className="w-full flex justify-center">
-        <HomestayCard />
+        <HomestayCard 
+        address={router?.query?.address}
+        owner={router?.query?.owner}
+        image1={router?.query?.image1}
+        image2={router?.query?.image2}
+        image3={router?.query?.image3}
+        name={router?.query?.name}
+        deskripsi={router?.query?.description}
+        harga={router?.query?.price_per_night}
+        key={router?.query?.id}/>
       </div>
       <div className="w-full flex justify-end">
         <div className='w-1/4 h-full bg-[#FBFBFB] rounded-lg shadow-xl mx-20'>
           <div className='m-5'>
             <DateRangeComp />
           </div>
-
         </div>
       </div>
     </Layout>
