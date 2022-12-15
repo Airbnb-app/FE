@@ -34,7 +34,7 @@ function dashboard() {
   function searchHomestay() {
     setLoading(true);
     axios
-      .get(`http://18.143.102.15:80/homestays/?name=${search}`, { headers: { Authorization: `Bearer ${token}` } })
+      .get(`https://numpangtidur.my.id/homestays/?name=${search}`, { headers: { Authorization: `Bearer ${token}` } })
       .then((ress) => {
         const result = ress.data.data;
         setData(result);
@@ -91,6 +91,12 @@ function dashboard() {
       }
     });
   };
+
+  useEffect(() => {
+    if (!cookie.token) {
+      Router.push("/");
+    }
+  }, [cookie.token]);
 
   return (
     <Layout dashboard={"shadow"} logout={() => logoutHandler()}name={name === undefined ? (

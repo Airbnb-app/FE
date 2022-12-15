@@ -98,12 +98,6 @@ function Payment() {
 
   }
 
-  useEffect(() => {
-    if (!cookie.token) {
-      Router.push("/");
-    }
-  }, [cookie.token]);
-
   return (
     <Layout
       logout={() => logoutHandler()}
