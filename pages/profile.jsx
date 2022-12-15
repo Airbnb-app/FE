@@ -14,11 +14,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
 import { data } from "autoprefixer";
+import Loading from "../components/Loading";
 
 const Profile = () => {
   const [profiledata, setProfileData] = useState({});
   const [cookie, setCookie, removeCookie] = useCookies();
-  const [Role, setRole] = useState();
   const [loading, setLoading] = useState(false);
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
@@ -277,7 +277,6 @@ const Profile = () => {
 
   useEffect(() => {
     getProfile();
-    setRole(cookie.role);
   }, []);
 
   const logoutHandler = () => {
@@ -412,7 +411,9 @@ const Profile = () => {
             </div>
           ) : (
             <div className=" w-full">
-              {profiledata.Homestay ? (
+              {loading ? (
+                <Loading />
+              ) : profiledata.Homestay ? (
                 profiledata.Homestay?.map((item) => (
                   <HomestayCard
                     onEdit={() => getHomestayByID(item.id)}

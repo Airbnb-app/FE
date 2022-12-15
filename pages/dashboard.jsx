@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import Swal from "sweetalert2";
 import Router from "next/router";
+import Loading from "../components/Loading";
 
 function dashboard() {
   const [data, setData] = useState();
@@ -140,7 +141,9 @@ function dashboard() {
         </div>
         {/* Ini akhir Carrousel */}
         <div className="w-full justify-center flex flex-col items-center">
-          {data ? (
+          {loading ? (
+            <Loading />
+          ) : data ? (
             data.map((item) => (
               <HomestayCard
                 address={item.address}
