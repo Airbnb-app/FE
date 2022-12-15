@@ -3,16 +3,15 @@ import React from "react";
 const Modal1 = ({ no, title, inputOne, inputTwo, inputThree, tombol1, tombol2, titleModal, onClick, inputFour, inputFive, inputSix, inputSeven }) => {
   return (
     <>
-    <button className="btn btn-ghost normal-case">
-      <label htmlFor={`my-modal-${no}`} className={`normal-case text-pink-airbnb bg-transparent cursor-pointer`}>
-        {title}
-      </label>
-    </button>
-      
+      <button className="btn btn-ghost normal-case">
+        <label htmlFor={`my-modal-${no}`} className={`normal-case text-pink-airbnb bg-transparent cursor-pointer`}>
+          {title}
+        </label>
+      </button>
 
       <input type="checkbox" id={`my-modal-${no}`} className="modal-toggle" />
       <div className="modal modal-middle sm:modal-middle">
-        <div className="modal-box  flex flex-col justify-center items-center">
+        <div className="modal-box bg-white flex flex-col justify-center items-center">
           <h3 className="font-bold lg:text-2xl  text-base text-pink-airbnb text-center  ">{titleModal}</h3>
           {inputOne ? inputOne : null}
           {inputTwo ? inputTwo : null}
@@ -23,11 +22,11 @@ const Modal1 = ({ no, title, inputOne, inputTwo, inputThree, tombol1, tombol2, t
           {inputSeven ? inputSeven : null}
 
           <div className="grid grid-cols-2 w-2/3 md:w-full lg:w-full max-w-md mt-3">
-            <label htmlFor={`my-modal-${no}`} className="btn bg-pink-airbnb normal-case border-none mx-1 hover:bg-red-900">
+            <label htmlFor={`my-modal-${no}`} className="btn bg-pink-airbnb normal-case border-none mx-1 hover:bg-red-900 text-white">
               {tombol1}
             </label>
 
-            <label htmlFor={`my-modal-${no}`} className="disabled:bg-white btn bg-pink-airbnb normal-case  border-none mx-1 hover:bg-green-700" onClick={onClick}>
+            <label htmlFor={`my-modal-${no}`} className="disabled:bg-white text-white btn bg-pink-airbnb normal-case  border-none mx-1 hover:bg-green-700" onClick={onClick}>
               {tombol2}
             </label>
           </div>
@@ -42,7 +41,7 @@ const Modal2 = ({ no, title, inputOne, inputTwo, inputThree, inputFour, inputFiv
     <>
       <input type="checkbox" id={`my-modal-${no}`} className="modal-toggle" />
       <div className="modal modal-middle sm:modal-middle">
-        <div className="modal-box  flex flex-col justify-center items-center">
+        <div className="modal-box bg-white  flex flex-col justify-center items-center">
           <h3 className="font-bold lg:text-2xl  text-base text-pink-airbnb text-center  ">{titleModal}</h3>
           {inputOne ? inputOne : null}
           {inputTwo ? inputTwo : null}
@@ -50,11 +49,11 @@ const Modal2 = ({ no, title, inputOne, inputTwo, inputThree, inputFour, inputFiv
           {inputFour ? inputFour : null}
 
           <div className="grid grid-cols-2 w-2/3 md:w-full lg:w-full max-w-md mt-3">
-            <label htmlFor={`my-modal-${no}`} className="btn bg-pink-airbnb normal-case border-none mx-1 hover:bg-red-900">
+            <label htmlFor={`my-modal-${no}`} className="btn bg-pink-airbnb normal-case border-none mx-1 hover:bg-red-900 text-white">
               {tombol1}
             </label>
 
-            <label htmlFor={`my-modal-${no}`} className="disabled:bg-white btn bg-pink-airbnb normal-case  border-none mx-1 hover:bg-green-700">
+            <label htmlFor={`my-modal-${no}`} className="disabled:bg-white btn bg-pink-airbnb normal-case  border-none mx-1 hover:bg-green-700 text-white">
               {tombol2}
             </label>
           </div>
