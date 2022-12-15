@@ -6,19 +6,16 @@ function Historycard({ start_date, end_date, homestay_name, total_price, submitB
   return (
     <div className='w-full bg-[#FBFBFB] flex items-center justify-center rounded-lg py-6 text-black'>
       <div className='grid grid-col w-[90%]'>
-        {/* <p className='text-3xl text-pink-airbnb font-bold pb-5'>{homestay_name}</p> */}
-        <p className='text-3xl text-pink-airbnb font-bold pb-5'>Bromo Homestay</p>
+        <p className='text-3xl text-pink-airbnb font-bold pb-5'>{homestay_name}</p>
         <div className='flex justify-between pt-5'>
           <div className='flex flex-row gap-5'>
             <div className='mr-5'>
               <p>check in</p>
-              {/* <p className='text-xl font-semibold'>{start_date}</p> */}
-              <p className='text-xl font-semibold'>29-10-2022</p>
+              <p className='text-xl font-semibold'>{start_date}</p>
             </div>
             <div className='ml-5'>
               <p className=' '>check out</p>
-              {/* <p className=' text-xl font-semibold'>{end_date}</p> */}
-              <p className='text-xl font-semibold'>10-11-2022</p>
+              <p className=' text-xl font-semibold'>{end_date}</p>
             </div>
           </div>
           <div className='text-xl '>
