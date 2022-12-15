@@ -41,6 +41,23 @@ function dashboard() {
       });
   }
 
+  const getReserve = (item, title) => {
+    Router.push({
+      pathname: `/reservation/${title}`,
+      query: {
+        address: item.address,
+        owner: item.owner,
+        image1: item.image1,
+        image2: item.image2,
+        image3: item.image3,
+        name: item.name,
+        deskripsi: item.description,
+        harga: item.price_per_night,
+        id: item.id,
+      },
+    });
+  };
+
   const logoutHandler = () => {
     Swal.fire({
       title: "Are you sure want to logout?",
@@ -117,7 +134,17 @@ function dashboard() {
         <div className="w-full justify-center flex flex-col items-center">
           {data ? (
             data.map((item) => (
-              <HomestayCard address={item.address} owner={item.owner} image1={item.image1} image2={item.image2} image3={item.image3} name={item.name} deskripsi={item.description} harga={item.price_per_night} key={item.id} />
+              <HomestayCard
+                address={item.address}
+                owner={item.owner}
+                image1={item.image1}
+                image2={item.image2}
+                image3={item.image3}
+                name={item.name}
+                deskripsi={item.description}
+                harga={item.price_per_night}
+                key={item.id} 
+                toReserve={() => getReserve(item, item.name)}/>
             ))
           ) : (
             <div className="flex flex-col justify-center items-center">
