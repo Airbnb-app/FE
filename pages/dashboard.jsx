@@ -51,8 +51,8 @@ function dashboard() {
         image2: item.image2,
         image3: item.image3,
         name: item.name,
-        deskripsi: item.description,
-        harga: item.price_per_night,
+        description: item.description,
+        price_per_night: item.price_per_night,
         id: item.id,
       },
     });
