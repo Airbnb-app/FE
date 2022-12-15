@@ -12,15 +12,15 @@ const Homestay = () => {
   const [cookie, setCookie, removeCookie] = useCookies();
   const router = useRouter()
 
-  console.log("cek router address: ",router.query.address)
-  console.log("cek router owner: ",router.query.owner)
-  console.log("cek router image: ",router.query.image1)
-  console.log("cek router image: ",router.query.image2)
-  console.log("cek router image: ",router.query.image3)
-  console.log("cek router nama: ",router.query.name)
-  console.log("cek router desk: ",router.query.description)
-  console.log("cek router harga: ",router.query.price_per_night)
-  console.log("cek router id: ",router.query.id)
+  console.log("cek router address: ",router?.query?.address)
+  console.log("cek router owner: ",router?.query?.owner)
+  console.log("cek router image: ",router?.query?.image1)
+  console.log("cek router image: ",router?.query?.image2)
+  console.log("cek router image: ",router?.query?.image3)
+  console.log("cek router nama: ",router?.query?.name)
+  console.log("cek router desk: ",router?.query?.description)
+  console.log("cek router harga: ",router?.query?.price_per_night)
+  console.log("cek router id: ",router?.query?.id)
 
   const logoutHandler = () => {
     Swal.fire({
