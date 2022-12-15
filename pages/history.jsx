@@ -17,6 +17,11 @@ function history() {
   const [rating, setRating] = useState('');
   const [feedback, setFeedback] = useState('');
 
+  const [name, setName] = useState()
+
+  useEffect(() => {
+    setName(cookie.name);
+  }, [])
 
   const router = useRouter();
 
@@ -80,7 +85,7 @@ function history() {
       .post('https://numpangtidur.my.id/feedbacks',
         {
           homestay_id: 4,
-          rating: "rating",
+          rating: rating,
           feedback: feedback,
         },
         { headers: { Authorization: `Bearer ${cookie.token}` } }
@@ -102,27 +107,50 @@ function history() {
   }, [cookie.token]);
 
   return (
-    <Layout history={"shadow"} logout={() => logoutHandler()} name={cookie?.name}>
+    <Layout history={"shadow"} logout={() => logoutHandler()} name={name === undefined ? (
+      <><p>you are not login</p></>
+    ) : (
+      <><p className='mt-2'>{name}</p></>
+    )}>
       <Navbar namePages="History" />
-      {historydata ? (
-        historydata.map((item) => (
-          <div id={item.id}>
-            <Historycard
-              start_date={item.start_date}
-              end_date={item.end_date}
-              total_price= {item.total_price}
-              submitButton={(e) => postFeedback(e)}
-              onChangeFeedback={(e) => { setFeedback(e.target.value) }}
-            />
-          </div>
-        ))
-      ) : (
-        <></>
-      )}
-      {/* <Historycard
-        submitButton={(e) => postFeedback(e)}
-        onChangeFeedback={(e) => { setFeedback(e.target.value) }}
-      /> */}
+      <div className='p-5'>
+        {historydata ? (
+          historydata.map((item) => (
+            <div id={item.id}>
+              <Historycard
+                homestay_name={item.homestay_name}
+                start_date={item.start_date}
+                end_date={item.end_date}
+                total_price={item.total_price}
+                submitButton={(e) => postFeedback(e)}
+                onChangeFeedback={(e) => { setFeedback(e.target.value) }}
+                rate1={() => setRating("1")}
+                rate2={() => setRating("2")}
+                rate3={() => setRating("3")}
+                rate4={() => setRating("4")}
+                rate5={() => setRating("5")}
+              />
+            </div>
+          ))
+        ) : (
+          <></>
+        )}
+        <Historycard
+          homestay_name={"aasfasdf"}
+          start_date={"abc"}
+          end_date={"abc"}
+          total_price={"abc"}
+          submitButton={(e) => postFeedback(e)}
+          onChangeFeedback={(e) => { setFeedback(e.target.value) }}
+          rate1={() => setRating("1")}
+          rate2={() => setRating("2")}
+          rate3={() => setRating("3")}
+          rate4={() => setRating("4")}
+          rate5={() => setRating("5")}
+        />
+      </div>
+
+
     </Layout>
   );
 }
