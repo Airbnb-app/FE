@@ -90,7 +90,7 @@ function dashboard() {
     <Layout dashboard={"shadow"} logout={() => logoutHandler()}>
       <div className="w-full flex flex-col px-5">
         {/* ini awal input */}
-        <div className="form-control w-full sticky top-2 z-10">
+        <div className="form-control w-full sticky top-2 z-20">
           <div className="input-group w-full">
             <input onChange={(e) => setSearch(e.target.value)} onSubmit={() => submitSearch()} type="text" placeholder="Search…" className="input input-bordered w-full" />
             <button onClick={() => submitSearch()} className="btn btn-square bg-pink-airbnb border-none">
@@ -103,14 +103,20 @@ function dashboard() {
         {/* ini akhir input */}
         {/* Ini awal Carrousel */}
         <div className=" mt-5 w-full">
-          <div className="carousel w-full h-64 rounded-xl">
+          <div className="carousel w-full h-64 rounded-xl bg-pink-airbnb">
             {data ? (
               data.map((item) => (
                 <div id={item.id} className="carousel-item w-full">
-                  <div className="grid grid-cols-3">
-                    <img src={item.image1} alt="" className="w-full h-64 object-cover" />
-                    <img src={item.image2} alt="" className="w-full h-64 object-cover" />
-                    <img src={item.image3} alt="" className="w-full h-64 object-cover" />
+                  <div className="grid grid-cols-3 w-full">
+                    <div className="flex justify-center items-center w-full  h-64">
+                      <img src={item.image1} alt="" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="flex justify-center items-center w-full h-64">
+                      <img src={item.image2} alt="" className=" w-full h-full object-cover" />
+                    </div>
+                    <div className="flex justify-center items-center w-full h-64">
+                      <img src={item.image3} alt="" className="w-full h-full object-cover" />
+                    </div>
                   </div>
                 </div>
               ))
@@ -118,10 +124,10 @@ function dashboard() {
               <></>
             )}
           </div>
-          <div className="flex justify-center w-full py-2 gap-2">
+          <div className="flex justify-center w-full overflow-auto py-2 gap-2">
             {data ? (
               data.map((item) => (
-                <a href={`#${item.id}`} className="btn btn-xs bg-pink-airbnb border-none">
+                <a href={`#${item.id}`} className="btn text-white btn-xs hover:bg-white hover:text-pink-airbnb bg-pink-airbnb border-none">
                   {item.name}
                 </a>
               ))
@@ -143,8 +149,9 @@ function dashboard() {
                 name={item.name}
                 deskripsi={item.description}
                 harga={item.price_per_night}
-                key={item.id} 
-                toReserve={() => getReserve(item, item.name)}/>
+                key={item.id}
+                toReserve={() => getReserve(item, item.name)}
+              />
             ))
           ) : (
             <div className="flex flex-col justify-center items-center">

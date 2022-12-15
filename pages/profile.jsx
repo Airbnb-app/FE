@@ -32,44 +32,116 @@ const Profile = () => {
   const [upload2, setUpload2] = useState("");
   const [upload3, setUpload3] = useState("");
 
+  // ini untuk masukan Edit HomeStay
+
+  const [editNameHomestay, setEditNameHomestay] = useState("");
+  const [editAddress, setEditAddres] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editPrice, setEditPrice] = useState();
+  const [idHomestay, setIdHomestay] = useState();
+  const [idUser, setIdUser] = useState();
+  const [editUpload1, setEditUpload1] = useState("");
+  const [editUpload2, setEditUpload2] = useState("");
+  const [editUpload3, setEditUpload3] = useState("");
+
+  const getHomestayByID = (id) => {
+    setLoading(true);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${cookie.token}`,
+      },
+    };
+    axios
+      .get(`https://numpangtidur.my.id/homestays/${id}`, config)
+      .then((res) => {
+        const { name, description, image1, image2, image3, id, price_per_night, user_id, address } = res.data.data;
+        setEditNameHomestay(name);
+        setEditDescription(description);
+        setEditAddres(address);
+        setEditPrice(price_per_night);
+        setEditUpload1(image1);
+        setEditUpload2(image2);
+        setEditUpload3(image3);
+        setIdHomestay(id);
+        setIdUser(user_id);
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err,
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const editHomestay = () => {
+    setLoading(true);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${cookie.token}`,
+      },
+    };
+    axios
+      .put(
+        `https://numpangtidur.my.id/homestays/${idHomestay}`,
+        {
+          name: editNameHomestay,
+          address: editAddress,
+          description: editDescription,
+          price_per_night: editPrice,
+          user_id: idUser,
+          image1: editUpload1,
+          image2: editUpload2,
+          image3: editUpload3,
+        },
+        config
+      )
+      .then((res) => {
+        const { message } = res.data;
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        getProfile();
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err,
+        });
+      })
+      .finally(() => setLoading(false));
+  };
+
   const addHomestay = () => {
     setLoading(true);
-    // const bodyFormData = new FormData();
-    // bodyFormData.append("image1", upload1);
-    // bodyFormData.append("image2", upload2);
-    // bodyFormData.append("image3", upload3);
 
-    // const body = {
-    //   name: nameHomestay,
-    //   address: address,
-    //   description: description,
-    //   price_per_night: price,
-    //   image1: bodyFormData,
-    //   image2: bodyFormData,
-    //   image3: bodyFormData,
-    // };
-    // const config = {
-    //   headers: {
-    //     Authorization: `Bearer ${cookie.token}`,
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    // };
-  
     axios
-      .post("https://numpangtidur.my.id/homestays", {
-        name: nameHomestay,
-        address: address,
-        description: description,
-        price_per_night: price,
-        image1:upload1,
-        image2: upload2,
-        image3: upload3,
-      }, {
-        headers: {
-          Authorization: `Bearer ${cookie.token}`,
-          "Content-Type": "multipart/form-data",
+      .post(
+        "https://numpangtidur.my.id/homestays",
+        {
+          name: nameHomestay,
+          address: address,
+          description: description,
+          price_per_night: price,
+          image1: upload1,
+          image2: upload2,
+          image3: upload3,
         },
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${cookie.token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((ress) => {
         const { message } = ress.data;
         Swal.fire({
@@ -124,29 +196,21 @@ const Profile = () => {
 
   const handleUpgrade = (e) => {
     setLoading(true);
-
-    // const bodyFormData = new FormData();
-
-    // bodyFormData.append("image1", image1);
-    // bodyFormData.append("image2", image2);
-    // bodyFormData.append("image3", image3);
-    // console.log("cek body",[...bodyFormData])
-    // const config = {
-    //   headers: {
-    //     Authorization: `Bearer ${cookie.token}`,
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    // };
-
     axios
-      .post(`http://18.143.102.15:80/users/upgrade`, {
-        image1:image1,
-        image2: image2,
-        image3: image3,
-      }, {headers: {
-        Authorization: `Bearer ${cookie.token}`,
-        "Content-Type": "multipart/form-data",
-      }},)
+      .post(
+        `http://18.143.102.15:80/users/upgrade`,
+        {
+          image1: image1,
+          image2: image2,
+          image3: image3,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${cookie.token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((ress) => {
         const { message } = ress.data;
         Swal.fire({
@@ -169,7 +233,6 @@ const Profile = () => {
       })
       .finally(() => setLoading(false));
   };
- 
 
   const getProfile = async () => {
     const config = {
@@ -177,8 +240,7 @@ const Profile = () => {
         Authorization: `Bearer ${cookie.token}`,
       },
     };
-    await
-    axios
+    await axios
       .get(`http://18.143.102.15:80/users`, config)
       .then((response) => {
         setProfileData(response.data.data);
@@ -224,10 +286,10 @@ const Profile = () => {
         headers: { Authorization: `Bearer ${cookie.userToken}` },
       })
       .then((response) => {
-        console.log("data hapus: ", response)
+        console.log("data hapus: ", response);
       })
       .catch((error) => {
-        console.log("data err: ", error)
+        console.log("data err: ", error);
       });
   };
 
@@ -278,66 +340,82 @@ const Profile = () => {
               <p>
                 <span className="mx-2">|</span>
               </p>
-              <a href="">
+              <div onClick={() => Router.push("/edit/profile")}>
                 <p>Edit Profile</p>
-              </a><p>
+              </div>
+              <p>
                 <span className="mx-2">|</span>
               </p>
-              <div className="btn btn-ghost" onClick={()=>onDelete()}>
-               <a href=""></a><p>Hapus Profile</p>
+              <div className="flex items-start">
+                <button onClick={() => onDelete()}>
+                  <p>Hapus Profile</p>
+                </button>
               </div>
             </div>
           </div>
         </div>
         <div className="flex justify-center">
           {role === "User" ? (
-            <div>You Not Hoster</div>
+            <div className="flex flex-col justify-center items-center">
+              <h1 className="text-5xl text-pink-airbnb font-bold animate-pulse">You Not Hoster</h1>
+              <p className="text-pink-airbnb font-bold mt-4 animate-pulse">Please Upgrade to Hoster with Upload three Photos</p>
+            </div>
           ) : (
             <div className=" w-full">
-              {profiledata.Homestay
-                ? profiledata.Homestay?.map((item) => (
-                    <HomestayCard
-                      onDelete={() => deleteHomestay(item.id)}
-                      delet={
-                        <div>
-                          <div className="flex flex-col items-center justify-center cursor-pointer">
-                            <FaTrashAlt />
-                            <p className="text-xs">Delete</p>
-                          </div>
+              {profiledata.Homestay ? (
+                profiledata.Homestay?.map((item) => (
+                  <HomestayCard
+                    onEdit={() => getHomestayByID(item.id)}
+                    onDelete={() => deleteHomestay(item.id)}
+                    delet={
+                      <div>
+                        <div className="flex flex-col items-center justify-center cursor-pointer">
+                          <FaTrashAlt />
+                          <p className="text-xs">Delete</p>
                         </div>
-                      }
-                      address={item.address}
-                      owner={cookie.name}
-                      name={item.name}
-                      image1={item.image1}
-                      image2={item.image2}
-                      image3={item.image3}
-                      harga={item.price_per_night}
-                      deskripsi={item.description}
-                      edit={
-                        <label htmlFor={`my-modal-2`} className={`normal-case text-pink-airbnb bg-transparent`}>
-                          <div className="flex flex-col items-center justify-center cursor-pointer">
-                            <RiPencilFill />
-                            <p className="text-xs">Edit</p>
-                          </div>
-                        </label>
-                      }
-                      key={item.id}
-                    />
-                  ))
-                : "add post Homestay"}
+                      </div>
+                    }
+                    address={item.address}
+                    owner={cookie.name}
+                    name={item.name}
+                    image1={item.image1}
+                    image2={item.image2}
+                    image3={item.image3}
+                    harga={item.price_per_night}
+                    deskripsi={item.description}
+                    edit={
+                      <label htmlFor={`my-modal-2`} className={`normal-case text-pink-airbnb bg-transparent`}>
+                        <div className="flex flex-col items-center justify-center cursor-pointer">
+                          <RiPencilFill />
+                          <p className="text-xs">Edit</p>
+                        </div>
+                      </label>
+                    }
+                    key={item.id}
+                  />
+                ))
+              ) : (
+                <div className="flex flex-col justify-center items-center">
+                  <h1 className="text-5xl text-pink-airbnb font-bold animate-pulse">Add Post Your Homestay</h1>
+                  <p className="text-pink-airbnb font-bold mt-4 animate-pulse">Offer your most comfortable homestay</p>
+                </div>
+              )}
             </div>
           )}
         </div>
-        <Modal2
+        <Modal1
+          onClick={() => editHomestay()}
           titleModal={"Edit Homestay Post"}
           no={2}
-          inputOne={<CostumInput3 />}
           tombol1={"Cancel"}
           tombol2={"Save"}
-          inputTwo={<CostumInput label={"Villa Premium 3"} type={"text"} />}
-          inputThree={<CostumInput label={"Description"} type={"text"} />}
-          inputFour={<CostumInput label={"Price"} type={"number"} />}
+          inputOne={<CostumInput value={editNameHomestay} onChange={(e) => setEditNameHomestay(e.target.value)} label={"Homestay Name"} type={"text"} />}
+          inputTwo={<CostumInput value={editAddress} onChange={(e) => setEditAddres(e.target.value)} label={"Address"} type={"text"} />}
+          inputThree={<CostumInput value={editDescription} onChange={(e) => setEditDescription(e.target.value)} label={"Description"} type={"text"} />}
+          inputFour={<CostumInput value={editPrice} label={"Price"} onChange={(e) => setEditPrice(e.target.value)} type={"number"} />}
+          inputFive={<CostumInput3 />}
+          inputSix={<CostumInput3 />}
+          inputSeven={<CostumInput3 />}
         />
       </div>
     </Layout>
