@@ -36,12 +36,11 @@ const Login = () => {
       email: email,
       password: password,
     };
-    await console.log(email);
-    await console.log(password);
+
     axios
       .post("https://numpangtidur.my.id/login", temp)
       .then((response) => {
-        console.log("hasil respon: ", response.data.data);
+
         const { data } = response.data;
         if (data) {
           Swal.fire({
@@ -59,12 +58,10 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
         Swal.fire({
-          position: "center",
           icon: "error",
-          title: "Email or Password incorrect",
-          showConfirmButton: true,
+          title: "Oops...",
+          text: error,
         });
       });
   };

@@ -47,6 +47,12 @@ const Profile = () => {
   const [editUpload2, setEditUpload2] = useState("");
   const [editUpload3, setEditUpload3] = useState("");
 
+  const [name, setName] = useState()
+
+  useEffect(() => {
+    setName(cookie.name);
+  }, [])
+  
   const getHomestayByID = (id) => {
     setLoading(true);
     const config = {
@@ -313,7 +319,7 @@ const Profile = () => {
         headers: { Authorization: `Bearer ${cookie.token}` },
       })
       .then((response) => {
-        console.log("data hapus: ", response);
+
         Swal.fire({
           title: "Are you sure want to delete account?",
           // text: "You won't be able to revert this!",
@@ -350,7 +356,11 @@ const Profile = () => {
   };
 
   return (
-    <Layout profile={"shadow"} logout={() => logoutHandler()}>
+    <Layout profile={"shadow"} logout={() => logoutHandler()} name={name === undefined ? (
+      <><p>you are not login</p></>
+    ) : (
+      <><p className='mt-2'>{name}</p></>
+    )}>
       <div className="w-full px-5">
         <Navbar namePages={"Profile"} />
         <div className="my-5 mx-5 text-pink-airbnb flex justify-start">
