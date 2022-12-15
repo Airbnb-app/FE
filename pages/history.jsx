@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Historycard from '../components/Historycard'
 import Layout from '../components/Layout'
 import Navbar from '../components/Navbar'
@@ -6,11 +6,15 @@ import { useCookies } from "react-cookie"
 import Swal from 'sweetalert2'
 import Router from 'next/router'
 import { useRouter } from "next/router"
-import {useEffect} from "react"
+import axios from 'axios'
 
 
 function history() {
   const [cookie, setCookie, removeCookie] = useCookies()
+  const [historydata, setHistoryData] = useState()
+
+  const [rating, setRating] = useState('');
+  const [feedback, setFeedback] = useState('');
 
   const router = useRouter()
 
@@ -49,10 +53,49 @@ function history() {
 
 
   }
+
+  const getReservation = () => {
+    axios
+      .get(`https://numpangtidur.my.id/reservations`, {
+        headers: {
+          Authorization: `Bearer ${cookie.token
+            }`
+        }
+      })
+      .then((response) => {
+        console.log(response.data)
+        setHistoryData(response.data.data)
+      })
+      .catch((error) => console.log(error))
+  }
+
+  const postFeedback = async (e) => {
+    e.preventDefault();
+    console.log(rating)
+    console.log(feedback)
+
+    axios
+      .post('https://numpangtidur.my.id/feedbacks',
+        {
+          homestay_id: 4,
+          rating: "rating",
+          feedback: feedback,
+        },
+        { headers: { Authorization: `Bearer ${cookie.token}` } }
+      )
+      .then((response) => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   useEffect(() => {
     if (!cookie.token) {
       router.push("/");
     }
+    // getReservation()
   }, [cookie.token]);
 
   return (
@@ -61,7 +104,19 @@ function history() {
       name={cookie?.name}
     >
       <Navbar namePages="History" />
-      <Historycard />
+      {/* {historydata ? (
+          historydata.map((item) => (
+            <div id={item.id}>
+              <Historycard />
+            </div>
+          ))
+        ) : (
+          <></>
+        )} */}
+      <Historycard
+        submitButton={(e) => postFeedback(e)}
+        onChangeFeedback={(e) => { setFeedback(e.target.value) }}
+      />
     </Layout>
   )
 }
