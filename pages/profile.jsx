@@ -34,29 +34,42 @@ const Profile = () => {
 
   const addHomestay = () => {
     setLoading(true);
-    const bodyFormData = new FormData();
-    bodyFormData.append("image1", upload1);
-    bodyFormData.append("image2", upload2);
-    bodyFormData.append("image3", upload3);
+    // const bodyFormData = new FormData();
+    // bodyFormData.append("image1", upload1);
+    // bodyFormData.append("image2", upload2);
+    // bodyFormData.append("image3", upload3);
 
-    const body = {
-      name: nameHomestay,
-      address: address,
-      description: description,
-      price_per_night: price,
-      image1: bodyFormData,
-      image2: bodyFormData,
-      image3: bodyFormData,
-    };
-    const config = {
-      headers: {
-        Authorization: `Bearer ${cookie.token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    };
-
+    // const body = {
+    //   name: nameHomestay,
+    //   address: address,
+    //   description: description,
+    //   price_per_night: price,
+    //   image1: bodyFormData,
+    //   image2: bodyFormData,
+    //   image3: bodyFormData,
+    // };
+    // const config = {
+    //   headers: {
+    //     Authorization: `Bearer ${cookie.token}`,
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // };
+  
     axios
-      .post("http://18.143.102.15:80/homestays", body, config)
+      .post("https://numpangtidur.my.id/homestays", {
+        name: nameHomestay,
+        address: address,
+        description: description,
+        price_per_night: price,
+        image1:upload1,
+        image2: upload2,
+        image3: upload3,
+      }, {
+        headers: {
+          Authorization: `Bearer ${cookie.token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((ress) => {
         const { message } = ress.data;
         Swal.fire({
@@ -112,21 +125,28 @@ const Profile = () => {
   const handleUpgrade = (e) => {
     setLoading(true);
 
-    const bodyFormData = new FormData();
+    // const bodyFormData = new FormData();
 
-    bodyFormData.append("image1", image1);
-    bodyFormData.append("image2", image2);
-    bodyFormData.append("image3", image3);
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${cookie.token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    };
+    // bodyFormData.append("image1", image1);
+    // bodyFormData.append("image2", image2);
+    // bodyFormData.append("image3", image3);
+    // console.log("cek body",[...bodyFormData])
+    // const config = {
+    //   headers: {
+    //     Authorization: `Bearer ${cookie.token}`,
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // };
 
     axios
-      .post(`http://18.143.102.15:80/users/upgrade`, bodyFormData, config)
+      .post(`http://18.143.102.15:80/users/upgrade`, {
+        image1:image1,
+        image2: image2,
+        image3: image3,
+      }, {headers: {
+        Authorization: `Bearer ${cookie.token}`,
+        "Content-Type": "multipart/form-data",
+      }},)
       .then((ress) => {
         const { message } = ress.data;
         Swal.fire({
@@ -149,6 +169,7 @@ const Profile = () => {
       })
       .finally(() => setLoading(false));
   };
+ 
 
   const getProfile = async () => {
     const config = {
@@ -156,7 +177,7 @@ const Profile = () => {
         Authorization: `Bearer ${cookie.token}`,
       },
     };
-
+    await
     axios
       .get(`http://18.143.102.15:80/users`, config)
       .then((response) => {
@@ -196,6 +217,18 @@ const Profile = () => {
         Router.push("/");
       }
     });
+  };
+  const onDelete = async () => {
+    await axios
+      .delete(`http://18.143.102.15:80/users`, {
+        headers: { Authorization: `Bearer ${cookie.userToken}` },
+      })
+      .then((response) => {
+        console.log("data hapus: ", response)
+      })
+      .catch((error) => {
+        console.log("data err: ", error)
+      });
   };
 
   console.log(profiledata);
@@ -247,7 +280,12 @@ const Profile = () => {
               </p>
               <a href="">
                 <p>Edit Profile</p>
-              </a>
+              </a><p>
+                <span className="mx-2">|</span>
+              </p>
+              <div className="btn btn-ghost" onClick={()=>onDelete()}>
+               <a href=""></a><p>Hapus Profile</p>
+              </div>
             </div>
           </div>
         </div>
@@ -272,6 +310,8 @@ const Profile = () => {
                       owner={cookie.name}
                       name={item.name}
                       image1={item.image1}
+                      image2={item.image2}
+                      image3={item.image3}
                       harga={item.price_per_night}
                       deskripsi={item.description}
                       edit={
@@ -282,6 +322,7 @@ const Profile = () => {
                           </div>
                         </label>
                       }
+                      key={item.id}
                     />
                   ))
                 : "add post Homestay"}
