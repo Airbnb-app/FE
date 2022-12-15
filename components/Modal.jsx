@@ -3,9 +3,12 @@ import React from "react";
 const Modal1 = ({ no, title, inputOne, inputTwo, inputThree, tombol1, tombol2, titleModal, onClick, inputFour, inputFive, inputSix, inputSeven }) => {
   return (
     <>
+    <button className="btn btn-ghost normal-case">
       <label htmlFor={`my-modal-${no}`} className={`normal-case text-pink-airbnb bg-transparent cursor-pointer`}>
         {title}
       </label>
+    </button>
+      
 
       <input type="checkbox" id={`my-modal-${no}`} className="modal-toggle" />
       <div className="modal modal-middle sm:modal-middle">
