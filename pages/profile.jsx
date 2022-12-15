@@ -280,16 +280,43 @@ const Profile = () => {
       }
     });
   };
-  const onDelete = async () => {
-    await axios
-      .delete(`http://18.143.102.15:80/users`, {
-        headers: { Authorization: `Bearer ${cookie.userToken}` },
+
+  const onDelete = () => {
+    axios
+      .delete(`https://numpangtidur.my.id/users`, {
+        headers: { Authorization: `Bearer ${cookie.token}` },
       })
       .then((response) => {
-        console.log("data hapus: ", response);
+        console.log("data hapus: ", response)
+        Swal.fire({
+          title: "Are you sure want to delete account?",
+          // text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Yes",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "No",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              text: "Delet account successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            removeCookie("name");
+            removeCookie("role");
+            removeCookie("token");
+            removeCookie("user_id");
+            Router.push("/");
+          }
+        });
+        
       })
       .catch((error) => {
-        console.log("data err: ", error);
+        console.log("data err: ", error)
       });
   };
 
@@ -337,18 +364,12 @@ const Profile = () => {
                   />
                 )}
               </div>
-              <p>
-                <span className="mx-2">|</span>
-              </p>
-              <div onClick={() => Router.push("/edit/profile")}>
+              <button className="btn btn-ghost normal-case" onClick={() => Router.push("/edit/profile")}>
                 <p>Edit Profile</p>
-              </div>
-              <p>
-                <span className="mx-2">|</span>
-              </p>
+              </button>
               <div className="flex items-start">
-                <button onClick={() => onDelete()}>
-                  <p>Hapus Profile</p>
+                <button className="btn btn-ghost normal-case" onClick={()=>onDelete()}>
+                  Hapus Profil
                 </button>
               </div>
             </div>
