@@ -56,7 +56,7 @@ function history() {
 
   }
 
-  const getReservation = () => {
+  const getReservation = async () => {
     axios
       .get(`https://numpangtidur.my.id/reservations`, {
         headers: {
@@ -65,7 +65,7 @@ function history() {
         }
       })
       .then((response) => {
-        console.log(response.data)
+        console.log(response)
         setHistoryData(response.data.data)
       })
       .catch((error) => console.log(error))
@@ -98,25 +98,31 @@ function history() {
     if (!cookie.token) {
       router.push("/");
     }
-    // getReservation()
+    getReservation()
   }, [cookie.token]);
 
   return (
     <Layout history={"shadow"} logout={() => logoutHandler()} name={cookie?.name}>
       <Navbar namePages="History" />
-      {/* {historydata ? (
-          historydata.map((item) => (
-            <div id={item.id}>
-              <Historycard />
-            </div>
-          ))
-        ) : (
-          <></>
-        )} */}
-      <Historycard
+      {historydata ? (
+        historydata.map((item) => (
+          <div id={item.id}>
+            <Historycard
+              start_date={item.start_date}
+              end_date={item.end_date}
+              total_price= {item.total_price}
+              submitButton={(e) => postFeedback(e)}
+              onChangeFeedback={(e) => { setFeedback(e.target.value) }}
+            />
+          </div>
+        ))
+      ) : (
+        <></>
+      )}
+      {/* <Historycard
         submitButton={(e) => postFeedback(e)}
         onChangeFeedback={(e) => { setFeedback(e.target.value) }}
-      />
+      /> */}
     </Layout>
   );
 }
