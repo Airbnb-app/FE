@@ -27,7 +27,7 @@ function RegisterForm() {
 
     await 
     axios
-      .post("http://18.143.102.15:80/users", temp)
+      .post("https://numpangtidur.my.id/users", temp)
       .then((response) => {
         console.log(response);
         router.push("/");

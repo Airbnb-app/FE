@@ -313,6 +313,12 @@ const Profile = () => {
     });
   };
 
+  useEffect(() => {
+    if (!cookie.token) {
+      Router.push("/");
+    }
+  }, [cookie.token]);
+
   const onDelete = () => {
     axios
       .delete(`https://numpangtidur.my.id/users`, {

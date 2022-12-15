@@ -135,6 +135,11 @@ const Homestay = () => {
     getFeedback();
   }, []);
 
+  useEffect(() => {
+    if (!cookie.token) {
+      router.push("/");
+    }
+  }, [cookie.token]);
 
   // for (let i = 0; i <= feedbackdata.rating; i++) {
   //   starnumber.push(<AiFillStar key={i} />);
