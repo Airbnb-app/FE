@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomestayCard = ({ edit, image1, image2, image3, name, deskripsi, harga }) => {
+const HomestayCard = ({ edit, image1, image2, image3, name, deskripsi, harga, address, owner, delet, onDelete, toReserve }) => {
   return (
     <div className="card card-side bg-white shadow-xl rounded-lg w-full h-64 my-5  hover:z-10 transition hover:scale-105">
       <figure className="w-64">
@@ -18,14 +18,22 @@ const HomestayCard = ({ edit, image1, image2, image3, name, deskripsi, harga }) 
       </figure>
       <div className="card-body">
         <div className="flex justify-between">
-          <h2 className="card-title text-pink-airbnb">
-            <a href="" className="hover:text-[#E75056]">
+          <h2 className="card-title text-pink-airbnb uppercase hover:text-[#E75056]" onClick={toReserve}>
               {name}
-            </a>
           </h2>
-          <div>{edit}</div>
+          <div className="flex items-center">
+            <button onClick={onDelete} className="mr-2 text-pink-airbnb">
+              {delet}
+            </button>
+            <div>{edit}</div>
+          </div>
         </div>
-        <p className="text-black-airbnb ">{deskripsi}</p>
+        <p className="text-black-airbnb text-xs">{deskripsi}</p>
+        <div>
+          <p className="text-black-airbnb text-xs">Address : {address}</p>
+          <p className="text-black-airbnb text-xs">Owner : {owner}</p>
+        </div>
+
         <div className="card-actions justify-start">
           <div className="rating">
             <input type="radio" name="rating-1" className="mask mask-star bg-black-airbnb" />

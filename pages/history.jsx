@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import Historycard from '../components/Historycard'
 import Layout from '../components/Layout'
@@ -16,7 +17,8 @@ function history() {
   const [rating, setRating] = useState('');
   const [feedback, setFeedback] = useState('');
 
-  const router = useRouter()
+
+  const router = useRouter();
 
   const logoutHandler = () => {
     Swal.fire({
@@ -41,9 +43,9 @@ function history() {
         removeCookie("role");
         removeCookie("token");
         removeCookie("user_id");
-        Router.push('/');
+        Router.push("/");
       }
-    })
+    });
 
     // useEffect(() => {
     //   if (!cookies.token) {
@@ -91,6 +93,7 @@ function history() {
       })
   }
 
+
   useEffect(() => {
     if (!cookie.token) {
       router.push("/");
@@ -99,10 +102,7 @@ function history() {
   }, [cookie.token]);
 
   return (
-    <Layout
-      logout={() => logoutHandler()}
-      name={cookie?.name}
-    >
+    <Layout history={"shadow"} logout={() => logoutHandler()} name={cookie?.name}>
       <Navbar namePages="History" />
       {/* {historydata ? (
           historydata.map((item) => (
@@ -118,7 +118,7 @@ function history() {
         onChangeFeedback={(e) => { setFeedback(e.target.value) }}
       />
     </Layout>
-  )
+  );
 }
 
-export default history
+export default history;
