@@ -24,9 +24,7 @@ function RegisterForm() {
       email: emailReg,
       password: passwordReg
     }
-    console.log(nameReg)
-    console.log(emailReg)
-    console.log(passwordReg)
+
     await 
     axios
       .post("http://18.143.102.15:80/users", temp)
@@ -35,7 +33,11 @@ function RegisterForm() {
         router.push("/");
       })
       .catch(error => {
-        console.log(error)
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       })
   }
   const swalSignUp = () =>{

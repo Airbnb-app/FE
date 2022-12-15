@@ -16,7 +16,6 @@ function Payment() {
   const [exMonth, setExMonth] = useState()
   const [exYear, setExYear] = useState()
 
-
   const title = router?.query?.titleHomestay
   const durasi = router?.query?.duration
   const idHome = router?.query?.id_homestay
@@ -25,14 +24,6 @@ function Payment() {
   const start = router?.query?.start_date
   const end = router?.query?.end_date
   const user_id = cookie.user_id
-
-  console.log("cek title: ", router?.query?.titleHomestay)
-  console.log("cek durasi: ", router?.query?.duration)
-  console.log("cek id homestay: ", router?.query?.id_homestay)
-  console.log("cek price/night: ", router?.query?.price_per_night)
-  console.log("cek total price: ", router?.query?.total_price)
-  console.log("cek start: ", router?.query?.start_date)
-  console.log("cek end: ", router?.query?.end_date)
 
   const confirmHandler = (e) =>{
     e.preventDefault()
@@ -156,7 +147,7 @@ function Payment() {
               onChange={(e)=>{setExYear(e.target.value)}}/>
             </div>
           </div>
-          <div className='w-full bg-[#FBFBFB] flex items-center justify-center rounded-lg pb-6 text-black'>
+          <div className='w-full bg-[#FBFBFB] flex items-center  rounded-lg pb-6 text-black'>
             <div className='grid grid-col w-[90%] pt-5'>
               <p className='text-3xl text-pink-airbnb font-bold py-3'>{router?.query?.titleHomestay}</p>
               <div className='flex justify-between pt-3'>

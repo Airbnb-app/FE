@@ -26,27 +26,16 @@ const Homestay = () => {
   const [pricePerNight, setPricePerNight] = useState()
   const [totalPrice, setTotalPrice] = useState()
   const titleHomestay = router?.query?.name
-  console.log("cekk nama home:", titleHomestay)
 
+
+  const [name, setName] = useState()
+
+  useEffect(() =>{
+    setName(cookie.name);
+  },[])
 
   const [feedbackdata, setFeedbackData] = useState()
   const starnumber = [];
-  //untuk data ke payment
-  // const homestayId = router?.query?.id
-  // const 
-
-  // console.log("cek router address: ", router?.query?.address)
-  // console.log("cek router owner: ", router?.query?.owner)
-  // console.log("cek router image: ", router?.query?.image1)
-  // console.log("cek router image: ", router?.query?.image2)
-  // console.log("cek router image: ", router?.query?.image3)
-  // console.log("cek router nama: ", router?.query?.name)
-  // console.log("cek router desk: ", router?.query?.description)
-  // console.log("cek router harga: ", router?.query?.price_per_night)
-  // console.log("cek router id: ", router?.query?.id)
-
-  console.log("tanggal mulai", start_date)
-  console.log("tanggal akhir", end_date)
 
   const id = router?.query?.id
 
@@ -62,7 +51,7 @@ const Homestay = () => {
       }
     }
     ).then((response) => {
-      console.log("berhasil check: ", response.data.data)
+
       setHomestayId(response.data.data)
       const { duration, homestay_id, price_per_night, total_price } = response.data.data
       setDuration(duration);
@@ -70,7 +59,11 @@ const Homestay = () => {
       setPricePerNight(price_per_night)
       setTotalPrice(total_price)
     }).catch((error) => {
-      console.log("err:", error)
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err,
+      });
     })
   }
 
@@ -141,7 +134,7 @@ const Homestay = () => {
   useEffect(() => {
     getFeedback();
   }, []);
-  console.log(feedbackdata)
+
 
   // for (let i = 0; i <= feedbackdata.rating; i++) {
   //   starnumber.push(<AiFillStar key={i} />);
@@ -151,7 +144,11 @@ const Homestay = () => {
   //   checkAvail()
   // }, [])
   return (
-    <Layout dashboard={"shadow"} logout={() => logoutHandler()}>
+    <Layout dashboard={"shadow"} logout={() => logoutHandler()}name={name === undefined ? (
+      <><p>you are not login</p></>
+    ) : (
+      <><p className='mt-2'>{name}</p></>
+    )}>
       <Navbar namePages={"Reservation "} />
       <div className="w-full flex justify-center">
         <HomestayCard
@@ -205,14 +202,14 @@ const Homestay = () => {
                     (
                       <>
                         <button
-                          className='btn bg-pink-airbnb border-none hover:bg-[#E75056] normal-case text-[22px]'
+                          className='btn bg-pink-airbnb border-none hover:bg-[#E75056] normal-case text-[22px] text-white'
                           onClick={() => reserve(idHomestay)}
                         >
                           Reserve</button>
                       </>
                     ) : (
                       <>
-                        <button type='submit' className='btn bg-pink-airbnb border-none hover:bg-[#E75056] normal-case text-[22px]' >
+                        <button type='submit' className='btn bg-pink-airbnb border-none hover:bg-[#E75056] normal-case text-[22px] text-white' >
                           Check Availability</button>
                       </>
                     )

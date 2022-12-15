@@ -78,8 +78,6 @@ function history() {
 
   const postFeedback = async (e) => {
     e.preventDefault();
-    console.log(rating)
-    console.log(feedback)
 
     axios
       .post('https://numpangtidur.my.id/feedbacks',
@@ -116,7 +114,7 @@ function history() {
       <div className='p-5'>
         {historydata ? (
           historydata.map((item) => (
-            <div id={item.id}>
+            <div id={item.id} className="mb-5">
               <Historycard
                 homestay_name={item.homestay_name}
                 start_date={item.start_date}
@@ -135,19 +133,7 @@ function history() {
         ) : (
           <></>
         )}
-        <Historycard
-          homestay_name={"aasfasdf"}
-          start_date={"abc"}
-          end_date={"abc"}
-          total_price={"abc"}
-          submitButton={(e) => postFeedback(e)}
-          onChangeFeedback={(e) => { setFeedback(e.target.value) }}
-          rate1={() => setRating("1")}
-          rate2={() => setRating("2")}
-          rate3={() => setRating("3")}
-          rate4={() => setRating("4")}
-          rate5={() => setRating("5")}
-        />
+        
       </div>
 
 
