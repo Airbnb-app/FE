@@ -2,9 +2,9 @@ import React from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { IconContext } from "react-icons";
 
-function Historycard({ start_date, end_date, homestay_name, total_price, submitButton, onChangeFeedback }) {
+function Historycard({ start_date, end_date, homestay_name, total_price, submitButton, onChangeFeedback,rate1,rate2,rate3,rate4,rate5 }) {
   return (
-    <div className='w-full bg-[#FBFBFB] flex items-center justify-center rounded-lg py-6 text-black'>
+    <div className='w-full bg-[#FBFBFB] flex items-center justify-center rounded-lg py-6 text-black '>
       <div className='grid grid-col w-[90%]'>
         <p className='text-3xl text-pink-airbnb font-bold pb-5'>{homestay_name}</p>
         <div className='flex justify-between pt-5'>
@@ -29,32 +29,41 @@ function Historycard({ start_date, end_date, homestay_name, total_price, submitB
             <div className='flex '>
               <p className=' inline-block align-middle text-xl  mr-5'>rate your experience :</p>
               <div className='flex items-center'>
-                <IconContext.Provider
-                  value={{ color: '#FF5A60', size: '24px' }}
-                >
-                  <AiFillStar />
-                </IconContext.Provider>
-                <IconContext.Provider
-                  value={{ color: '#FF5A60', size: '24px' }}
-                >
-                  <AiFillStar />
-                </IconContext.Provider>
-                <IconContext.Provider
-                  value={{ color: '#FF5A60', size: '24px' }}
-                >
-                  <AiFillStar />
-                </IconContext.Provider>
-                <IconContext.Provider
-                  value={{ color: '#FF5A60', size: '24px' }}
-                >
-                  <AiFillStar />
-                </IconContext.Provider>
-                <IconContext.Provider
-                  value={{ color: '#D9D9D9', size: '24px' }}
-                >
-                  <AiFillStar />
-                </IconContext.Provider>
-
+                <div onClick={rate1}>
+                  <IconContext.Provider
+                    value={{ color: '#FF5A60', size: '24px' }}
+                  >
+                    <AiFillStar />
+                  </IconContext.Provider>
+                </div>
+                <div onClick={rate2}>
+                  <IconContext.Provider
+                    value={{ color: '#FF5A60', size: '24px' }}
+                  >
+                    <AiFillStar />
+                  </IconContext.Provider>
+                </div>
+                <div onClick={rate3}>
+                  <IconContext.Provider
+                    value={{ color: '#FF5A60', size: '24px' }}
+                  >
+                    <AiFillStar />
+                  </IconContext.Provider>
+                </div>
+                <div onClick={rate4}>
+                  <IconContext.Provider
+                    value={{ color: '#FF5A60', size: '24px' }}
+                  >
+                    <AiFillStar />
+                  </IconContext.Provider>
+                </div>
+                <div onClick={rate5}>
+                  <IconContext.Provider
+                    value={{ color: '#FF5A60', size: '24px' }}
+                  >
+                    <AiFillStar />
+                  </IconContext.Provider>
+                </div>
               </div>
             </div>
             <div className='w-full flex pt-5'>
