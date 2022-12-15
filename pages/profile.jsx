@@ -13,15 +13,18 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
+import { data } from "autoprefixer";
 
 const Profile = () => {
   const [profiledata, setProfileData] = useState({});
   const [cookie, setCookie, removeCookie] = useCookies();
-  const [role, setRole] = useState();
+  const [Role, setRole] = useState();
   const [loading, setLoading] = useState(false);
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
+
+  const role = profiledata.role;
 
   // Ini untuk masukan Add Homestay
   const [nameHomestay, setNameHomestay] = useState("");
@@ -79,11 +82,6 @@ const Profile = () => {
 
   const editHomestay = () => {
     setLoading(true);
-    const config = {
-      headers: {
-        Authorization: `Bearer ${cookie.token}`,
-      },
-    };
     axios
       .put(
         `https://numpangtidur.my.id/homestays/${idHomestay}`,
@@ -97,7 +95,12 @@ const Profile = () => {
           image2: editUpload2,
           image3: editUpload3,
         },
-        config
+        {
+          headers: {
+            Authorization: `Bearer ${cookie.token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
       )
       .then((res) => {
         const { message } = res.data;
@@ -159,7 +162,6 @@ const Profile = () => {
           title: "Oops...",
           text: err,
         });
-        console.log(err);
       })
       .finally(() => setLoading(false));
   };
@@ -171,34 +173,54 @@ const Profile = () => {
         Authorization: `Bearer ${cookie.token}`,
       },
     };
-    axios
-      .delete(`http://18.143.102.15:80/homestays/${id}`, config)
-      .then((ress) => {
-        const { message } = ress.data;
+    Swal.fire({
+      title: "Are you sure want to Delete?",
+      // text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Yes",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`https://numpangtidur.my.id/homestays/${id}`, config)
+          .then((ress) => {
+            const { message } = ress.data;
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: message,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            getProfile();
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: err,
+            });
+          })
+          .finally(() => setLoading(false));
         Swal.fire({
           position: "center",
           icon: "success",
-          title: message,
+          text: "Delete successfully",
           showConfirmButton: false,
           timer: 1500,
         });
-        getProfile();
-      })
-      .catch((err) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: err,
-        });
-      })
-      .finally(() => setLoading(false));
+      }
+    });
   };
 
   const handleUpgrade = (e) => {
     setLoading(true);
     axios
       .post(
-        `http://18.143.102.15:80/users/upgrade`,
+        `https://numpangtidur.my.id/users/upgrade`,
         {
           image1: image1,
           image2: image2,
@@ -220,8 +242,8 @@ const Profile = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        removeCookie("role");
         getProfile();
-        setCookie("role", profiledata.role);
       })
       .catch((err) => {
         Swal.fire({
@@ -229,7 +251,6 @@ const Profile = () => {
           title: "Oops...",
           text: err,
         });
-        console.log(err);
       })
       .finally(() => setLoading(false));
   };
@@ -241,11 +262,17 @@ const Profile = () => {
       },
     };
     await axios
-      .get(`http://18.143.102.15:80/users`, config)
+      .get(`https://numpangtidur.my.id/users`, config)
       .then((response) => {
         setProfileData(response.data.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
+      });
   };
 
   useEffect(() => {
@@ -287,7 +314,7 @@ const Profile = () => {
         headers: { Authorization: `Bearer ${cookie.token}` },
       })
       .then((response) => {
-        console.log("data hapus: ", response)
+        console.log("data hapus: ", response);
         Swal.fire({
           title: "Are you sure want to delete account?",
           // text: "You won't be able to revert this!",
@@ -313,14 +340,16 @@ const Profile = () => {
             Router.push("/");
           }
         });
-        
       })
       .catch((error) => {
-        console.log("data err: ", error)
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       });
   };
 
-  console.log(profiledata);
   return (
     <Layout profile={"shadow"} logout={() => logoutHandler()}>
       <div className="w-full px-5">
@@ -368,14 +397,14 @@ const Profile = () => {
                 <p>Edit Profile</p>
               </button>
               <div className="flex items-start">
-                <button className="btn btn-ghost normal-case" onClick={()=>onDelete()}>
+                <button className="btn btn-ghost normal-case" onClick={() => onDelete()}>
                   Hapus Profil
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex mx-5 justify-center">
           {role === "User" ? (
             <div className="flex flex-col justify-center items-center">
               <h1 className="text-5xl text-pink-airbnb font-bold animate-pulse">You Not Hoster</h1>
@@ -434,9 +463,9 @@ const Profile = () => {
           inputTwo={<CostumInput value={editAddress} onChange={(e) => setEditAddres(e.target.value)} label={"Address"} type={"text"} />}
           inputThree={<CostumInput value={editDescription} onChange={(e) => setEditDescription(e.target.value)} label={"Description"} type={"text"} />}
           inputFour={<CostumInput value={editPrice} label={"Price"} onChange={(e) => setEditPrice(e.target.value)} type={"number"} />}
-          inputFive={<CostumInput3 />}
-          inputSix={<CostumInput3 />}
-          inputSeven={<CostumInput3 />}
+          inputFive={<CostumInput3 id={"image1"} name={"image1"} value={data.name} onChange={(e) => setEditUpload1(e.target.files[0])} />}
+          inputSix={<CostumInput3 onChange={(e) => setEditUpload2(e.target.files[0])} />}
+          inputSeven={<CostumInput3 onChange={(e) => setEditUpload3(e.target.files[0])} />}
         />
       </div>
     </Layout>
