@@ -39,7 +39,7 @@ const Login = () => {
     await console.log(email);
     await console.log(password);
     axios
-      .post("http://18.143.102.15:80/login", temp)
+      .post("https://numpangtidur.my.id/login", temp)
       .then((response) => {
         console.log("hasil respon: ", response.data.data);
         const { data } = response.data;
