@@ -9,6 +9,8 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import { Input } from '@material-tailwind/react'
 
+import { AiFillStar } from 'react-icons/ai'
+
 const Homestay = () => {
   const router = useRouter()
   const [cookie, setCookie, removeCookie] = useCookies();
@@ -27,6 +29,8 @@ const Homestay = () => {
   console.log("cekk nama home:", titleHomestay)
 
 
+  const [feedbackdata, setFeedbackData] = useState()
+  const starnumber = [];
   //untuk data ke payment
   // const homestayId = router?.query?.id
   // const 
@@ -113,6 +117,36 @@ const Homestay = () => {
     })
 
   }
+  const getFeedback = () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${cookie.token}`,
+      },
+    };
+    axios
+      .get(`https://numpangtidur.my.id/homestays/${parseInt(id)}`, config)
+      .then((response) => {
+        setFeedbackData(response.data.data.feedback)
+
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err,
+        });
+      })
+  }
+
+  useEffect(() => {
+    getFeedback();
+  }, []);
+  console.log(feedbackdata)
+
+  // for (let i = 0; i <= feedbackdata.rating; i++) {
+  //   starnumber.push(<AiFillStar key={i} />);
+  // }
+
   // useEffect(()=>{
   //   checkAvail()
   // }, [])
@@ -132,6 +166,25 @@ const Homestay = () => {
           key={router?.query?.id} />
       </div>
       <div className="w-full flex justify-end">
+        <div className='w-3/4 h-full bg-[#FBFBFB] text-black p-7 rounded-lg shadow-xl'>
+          <p className='text-2xl text-pink-airbnb'>
+            Last 3 reviews :
+          </p>
+          {feedbackdata ? (
+            feedbackdata.slice(-3).map((item) => (
+              <div className='py-5'>
+                <p className='flex items-center'>{item.rating} <AiFillStar />  from  {item.poster}</p>
+                {item.feedback}
+
+                {starnumber}
+              </div>
+
+              // {for (i=0;i<={item.rating})}
+            ))
+          ) : (
+            <></>
+          )}
+        </div>
         <div className='w-1/4 h-full bg-[#FBFBFB] rounded-lg shadow-xl mx-20'>
           <div className='m-5'>
             <form className=''
@@ -151,9 +204,9 @@ const Homestay = () => {
                   homestay_id ?
                     (
                       <>
-                        <button 
-                        className='btn bg-pink-airbnb border-none hover:bg-[#E75056] normal-case text-[22px]'
-                        onClick={()=>reserve(idHomestay)}
+                        <button
+                          className='btn bg-pink-airbnb border-none hover:bg-[#E75056] normal-case text-[22px]'
+                          onClick={() => reserve(idHomestay)}
                         >
                           Reserve</button>
                       </>
@@ -171,18 +224,18 @@ const Homestay = () => {
                 homestay_id ?
                   (
                     <>
-                    <div className='text-black'>
-                      <p>Duration: {duration}</p>
-                      <p>ID Homestay: {idHomestay}</p>
-                      <p>Price/Night: {pricePerNight}</p>
-                      <p>Total: {totalPrice}</p>
-                    </div>
+                      <div className='text-black'>
+                        <p>Duration: {duration}</p>
+                        <p>ID Homestay: {idHomestay}</p>
+                        <p>Price/Night: {pricePerNight}</p>
+                        <p>Total: {totalPrice}</p>
+                      </div>
                     </>
                   ) : (
                     <>
-                    <div className='text-black'>
-                      <p>check again</p>
-                    </div>
+                      <div className='text-black'>
+                        <p>check again</p>
+                      </div>
                     </>
                   )
               }
