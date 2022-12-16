@@ -62,7 +62,7 @@ const Homestay = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: err,
+        text: "Your dates are already booked",
       });
     })
   }

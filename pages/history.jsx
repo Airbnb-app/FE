@@ -72,11 +72,7 @@ function history() {
         }
       })
       .then((response) => {
-        console.log(response)
         setHistoryData(response.data.data)
-        console.log(response.data.data.homestay_id)
-        // const {homestay_id} = response.data.data;
-        // setIdState(homestay_id)
       })
       .catch((error) => console.log(error))
   }
@@ -95,7 +91,6 @@ function history() {
       )
       .then((response) => {
         console.log(response)
-        console.log(idstate)
       })
       .catch(error => {
         console.log(error)

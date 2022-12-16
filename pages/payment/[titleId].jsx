@@ -48,7 +48,7 @@ function Payment() {
     },
   }
     ).then((response)=>{
-      console.log("jadi: ",response)
+
       Swal.fire({
         position: "center",
         icon: "success",
@@ -58,16 +58,10 @@ function Payment() {
       });
       Router.push('/dashboard');
     }).catch((err)=>{
-      console.log("gagal: ",err)
+      console.log(err)
     })
   }
-  console.log("user id", user_id)
-  console.log("cek fullname: ", fullName)
-  console.log("cek card number: ", cardNumber)
-  console.log("cek cvv: ", cvv)
-  console.log("cek ex month: ", exMonth)
-  console.log("cek ex year: ", exYear)
-
+  
   useEffect(() => {
     setName(cookie.name);
   }, [])
