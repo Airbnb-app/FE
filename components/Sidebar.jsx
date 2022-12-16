@@ -4,6 +4,7 @@ import { FaHistory } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import Head from "next/head";
+import Link from "next/link";
 
 const Sidebar = ({ dashboard, profile, history, logout, name }) => {
   return (
@@ -33,30 +34,30 @@ const Sidebar = ({ dashboard, profile, history, logout, name }) => {
           <div className="flex flex-col justify-between h-3/4  ">
             <div className="pt-10 flex justify-center">
               <div className="mb-2">
-                <a href="/dashboard" className={`h-16 ${dashboard}-xl text-white rounded-xl flex items-center p-3 m-2 hover:shadow-lg hover:font-bold hover:z-10 transition hover:scale-105 `}>
+                <Link href="/dashboard" className={`h-16 ${dashboard}-xl text-white rounded-xl flex items-center p-3 m-2 hover:shadow-lg hover:font-bold hover:z-10 transition hover:scale-105 `}>
                   <div className=" flex items-center h-full">
                     <div className="flex items-center mr-5  h-full  text-white text-xl">
                       <TbBrandAirbnb />
                     </div>
                     <h2 className={`text-white text-xl `}>Dashboard</h2>
                   </div>
-                </a>
-                <a href="/profile" className={` ${profile}-xl h-16 rounded-xl flex items-center p-3 m-2 hover:shadow-lg hover:font-bold hover:z-10 transition hover:scale-105 `}>
+                </Link>
+                <Link href="/profile" className={` ${profile}-xl h-16 rounded-xl flex items-center p-3 m-2 hover:shadow-lg hover:font-bold hover:z-10 transition hover:scale-105 `}>
                   <div className=" flex items-center  h-full">
                     <div className="flex items-center mr-5  h-full text-white text-xl">
                       <CgProfile />
                     </div>
                     <h2 className={` text-white text-xl`}>Profile</h2>
                   </div>
-                </a>
-                <a href="/history" className={`${history}-xl h-16 rounded-xl flex items-center p-3 m-2 hover:shadow-lg hover:font-bold hover:z-10 transition hover:scale-105 `}>
+                </Link>
+                <Link href="/history" className={`${history}-xl h-16 rounded-xl flex items-center p-3 m-2 hover:shadow-lg hover:font-bold hover:z-10 transition hover:scale-105 `}>
                   <div className=" flex items-center  h-full">
                     <div className="flex items-center mr-5  h-full text-white text-xl">
                       <FaHistory />
                     </div>
                     <h2 className={` text-white text-xl`}>History</h2>
                   </div>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="p-5  flex justify-center items-center">

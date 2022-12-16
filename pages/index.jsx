@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
+import Link from "next/link";
 
 import Container from "../components/Container";
 import axios from "axios";
@@ -40,7 +41,6 @@ const Login = () => {
     axios
       .post("https://numpangtidur.my.id/login", temp)
       .then((response) => {
-
         const { data } = response.data;
         if (data) {
           Swal.fire({
@@ -116,9 +116,9 @@ const Login = () => {
                 />
               </div>
               <div className="flex justify-end py-2">
-                <a href="/register">
+                <Link href="/register">
                   <p className="text-pink-airbnb hover:text-[#E75056]">Sign Up</p>
-                </a>
+                </Link>
               </div>
               <button type="submit" className="w-[90%] flex m-auto mt-6 py-2 bg-pink-airbnb shadow-lg border-none text-white text-[24px] normal-case font-semibold rounded-lg btn hover:bg-[#E75056]">
                 Login
