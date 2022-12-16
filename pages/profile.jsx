@@ -47,12 +47,12 @@ const Profile = () => {
   const [editUpload2, setEditUpload2] = useState("");
   const [editUpload3, setEditUpload3] = useState("");
 
-  const [name, setName] = useState()
+  const [name, setName] = useState();
 
   useEffect(() => {
     setName(cookie.name);
-  }, [])
-  
+  }, []);
+
   const getHomestayByID = (id) => {
     setLoading(true);
     const config = {
@@ -248,8 +248,11 @@ const Profile = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        removeCookie("name");
         removeCookie("role");
-        getProfile();
+        removeCookie("token");
+        removeCookie("user_id");
+        Router.push("/");
       })
       .catch((err) => {
         Swal.fire({
@@ -325,7 +328,6 @@ const Profile = () => {
         headers: { Authorization: `Bearer ${cookie.token}` },
       })
       .then((response) => {
-
         Swal.fire({
           title: "Are you sure want to delete account?",
           // text: "You won't be able to revert this!",
@@ -362,11 +364,21 @@ const Profile = () => {
   };
 
   return (
-    <Layout profile={"shadow"} logout={() => logoutHandler()} name={name === undefined ? (
-      <><p>you are not login</p></>
-    ) : (
-      <><p className='mt-2'>{name}</p></>
-    )}>
+    <Layout
+      profile={"shadow"}
+      logout={() => logoutHandler()}
+      name={
+        name === undefined ? (
+          <>
+            <p>you are not login</p>
+          </>
+        ) : (
+          <>
+            <p className="mt-2">{name}</p>
+          </>
+        )
+      }
+    >
       <div className="w-full px-5">
         <Navbar namePages={"Profile"} />
         <div className="my-5 mx-5 text-pink-airbnb flex justify-start">
@@ -427,9 +439,7 @@ const Profile = () => {
             </div>
           ) : (
             <div className=" w-full">
-              {loading ? (
-                <Loading />
-              ) : profiledata.Homestay ? (
+              {profiledata.Homestay ? (
                 profiledata.Homestay?.map((item) => (
                   <HomestayCard
                     onEdit={() => getHomestayByID(item.id)}
