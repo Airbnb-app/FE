@@ -9,18 +9,18 @@ import Swal from "sweetalert2";
 import Router from "next/router";
 import Loading from "../components/Loading";
 
-function dashboard() {
+function Dashboard() {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [cookie, setCookie, removeCookie] = useCookies();
   const [search, setSearch] = useState("");
 
-  const [name, setName] = useState()
+  const [name, setName] = useState();
 
-  useEffect(() =>{
+  useEffect(() => {
     setName(cookie.name);
-  },[])
-  
+  }, []);
+
   const token = cookie.token;
 
   useEffect(() => {
@@ -99,11 +99,21 @@ function dashboard() {
   }, [cookie.token]);
 
   return (
-    <Layout dashboard={"shadow"} logout={() => logoutHandler()}name={name === undefined ? (
-      <><p>you are not login</p></>
-    ) : (
-      <><p className='mt-2'>{name}</p></>
-    )}>
+    <Layout
+      dashboard={"shadow"}
+      logout={() => logoutHandler()}
+      name={
+        name === undefined ? (
+          <>
+            <p>you are not login</p>
+          </>
+        ) : (
+          <>
+            <p className="mt-2">{name}</p>
+          </>
+        )
+      }
+    >
       <div className="w-full flex flex-col px-5">
         {/* ini awal input */}
         <div className="form-control w-full sticky top-2 z-20  ">
@@ -185,4 +195,4 @@ function dashboard() {
   );
 }
 
-export default dashboard;
+export default Dashboard;
