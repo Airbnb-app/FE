@@ -86,7 +86,6 @@ const Profile = () => {
         { headers: { Authorization: `Bearer ${cookie.token}` } }
       )
       .then((response) => {
-        console.log(response);
         router.push("/profile");
       })
       .catch((error) => {
