@@ -117,8 +117,8 @@ function history() {
             <div id={item.id} className="mb-5">
               <Historycard
                 homestay_name={item.homestay_name}
-                start_date={item.start_date}
-                end_date={item.end_date}
+                start_date={item.start_date.substring(0, 10)}
+                end_date={item.end_date.substring(0, 10)}
                 total_price={item.total_price}
                 submitButton={(e) => postFeedback(e)}
                 onChangeFeedback={(e) => { setFeedback(e.target.value) }}

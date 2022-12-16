@@ -30,6 +30,7 @@ function Payment() {
     axios.post(`https://numpangtidur.my.id/reservations`,
    { homestay_id: parseInt(idHome),
     start_date: start,
+    end_date: end,
     duration: parseInt(durasi),
     total_price: parseInt(totalPrice),
     user_id: parseInt(user_id),
@@ -48,6 +49,14 @@ function Payment() {
   }
     ).then((response)=>{
       console.log("jadi: ",response)
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        text: "Payment Succes, See You Later",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      Router.push('/dashboard');
     }).catch((err)=>{
       console.log("gagal: ",err)
     })
@@ -148,7 +157,7 @@ function Payment() {
                 <div className='flex flex-row gap-3'>
                   <div className='mr-5'>
                     <p>check in</p>
-                    <p className='text-xl font-semibold'>{router?.query?.start_date}</p>
+                    <p className='text-xl font-semibold'>{router?.query?.start_date.substring(0, 10)}</p>
                   </div>
                   <div className='ml-5'>
                     <p className=' '>check out</p>

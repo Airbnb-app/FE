@@ -19,7 +19,6 @@ function Historycard({ start_date, end_date, homestay_name, total_price, submitB
             </div>
           </div>
           <div className='text-xl '>
-            <p>10 nights @ $25/night</p>
             <p className='text-end'>Total {total_price}</p>
           </div>
         </div>
