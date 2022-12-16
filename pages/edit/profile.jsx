@@ -13,13 +13,13 @@ const Profile = () => {
   const [cookie, setCookie, removeCookie] = useCookies();
   const router = useRouter();
 
-  const [name, setName] = useState()
+  const [name, setName] = useState();
 
-  useEffect(() =>{
+  useEffect(() => {
     setName(cookie.name);
-  },[])
+  }, []);
 
-  const logoutHandler = () => {
+  const LogoutHandler = () => {
     Swal.fire({
       title: "Are you sure want to logout?",
       // text: "You won't be able to revert this!",
@@ -109,11 +109,21 @@ const Profile = () => {
   }, [cookie.token]);
 
   return (
-    <Layout profile={"shadow"} logout={() => logoutHandler()}name={name === undefined ? (
-        <><p>you are not login</p></>
-      ) : (
-        <><p className='mt-2'>{name}</p></>
-      )}>
+    <Layout
+      profile={"shadow"}
+      logout={() => LogoutHandler()}
+      name={
+        name === undefined ? (
+          <>
+            <p>you are not login</p>
+          </>
+        ) : (
+          <>
+            <p className="mt-2">{name}</p>
+          </>
+        )
+      }
+    >
       <Navbar namePages={"Edit Profile"} />
       <div className="h-[500px] bg-white shadow-xl rounded-lg m-5">
         <div className="text-pink-airbnb flex justify-center py-5">

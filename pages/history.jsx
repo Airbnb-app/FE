@@ -25,7 +25,7 @@ function History() {
 
   const router = useRouter();
 
-  const logoutHandler = () => {
+  const LogoutHandler = () => {
     Swal.fire({
       title: "Are you sure want to logout?",
       // text: "You won't be able to revert this!",
@@ -103,7 +103,7 @@ function History() {
   return (
     <Layout
       history={"shadow"}
-      logout={() => logoutHandler()}
+      logout={() => LogoutHandler()}
       name={
         name === undefined ? (
           <>

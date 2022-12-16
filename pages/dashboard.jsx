@@ -64,7 +64,7 @@ function Dashboard() {
     });
   };
 
-  const logoutHandler = () => {
+  const LogoutHandler = () => {
     Swal.fire({
       title: "Are you sure want to logout?",
       // text: "You won't be able to revert this!",
@@ -101,7 +101,7 @@ function Dashboard() {
   return (
     <Layout
       dashboard={"shadow"}
-      logout={() => logoutHandler()}
+      logout={() => LogoutHandler()}
       name={
         name === undefined ? (
           <>
@@ -179,7 +179,6 @@ function Dashboard() {
                 name={item.name}
                 deskripsi={item.description}
                 harga={item.price_per_night}
-                key={item.id}
                 toReserve={() => getReserve(item, item.name)}
               />
             ))
