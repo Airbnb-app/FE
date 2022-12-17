@@ -132,7 +132,7 @@ function Dashboard() {
           <div className="carousel w-full h-64 rounded-xl ">
             {data ? (
               data.map((item) => (
-                <div id={item.id} className="carousel-item w-full">
+                <div id={item.id} key={item.id} className="carousel-item w-full">
                   <div className="grid grid-cols-3 w-full">
                     <div className="flex justify-center items-center w-full  h-64">
                       <img src={item.image1} alt="" className="w-full h-full object-cover" />
@@ -154,7 +154,7 @@ function Dashboard() {
             <div className="overflow-auto py-2 gap-2 w-full flex flex-wrap justify-center">
               {data ? (
                 data.map((item) => (
-                  <a href={`#${item.id}`} className="btn text-white btn-xs hover:bg-white hover:text-pink-airbnb bg-pink-airbnb border-none">
+                  <a key={item.id} href={`#${item.id}`} className="btn text-white btn-xs hover:bg-white hover:text-pink-airbnb bg-pink-airbnb border-none">
                     {item.name}
                   </a>
                 ))
@@ -171,6 +171,7 @@ function Dashboard() {
           ) : data ? (
             data.map((item) => (
               <HomestayCard
+                key={item.id}
                 address={item.address}
                 owner={item.owner}
                 image1={item.image1}
