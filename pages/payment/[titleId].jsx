@@ -195,7 +195,7 @@ function Payment() {
                 <div className="flex flex-row gap-3">
                   <div className="mr-5">
                     <p>check in</p>
-                    <p className="text-xl font-semibold">{router?.query?.start_date.substring(0, 10)}</p>
+                    <p className="text-xl font-semibold">{router?.query?.start_date}</p>
                   </div>
                   <div className="ml-5">
                     <p className=" ">check out</p>
