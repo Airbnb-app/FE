@@ -1,3 +1,6 @@
+<h1 align="center">Airbnb Kelompok 2</h1>
+<h3 align="center">Link Deploy : https://airbnb-achsmboh.vercel.app/</h3>
+
 ## About Project
 
 Airbnb dimulai pada tahun 2008 saat dua desainer yang memiliki tempat menerima tiga wisatawan yang membutuhkan tempat menginap. Kini, jutaan Tuan Rumah dan tamu telah membuat akun Airbnb gratis untuk menikmati pandangan unik tentang dunia masing-masing.
