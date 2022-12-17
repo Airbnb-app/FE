@@ -1,8 +1,8 @@
 import React from "react";
 
-const HomestayCard = ({ edit, image1, image2, image3, name, deskripsi, harga, address, owner, delet, onDelete, toReserve, onEdit }) => {
+const HomestayCard = ({ key, edit, image1, image2, image3, name, deskripsi, harga, address, owner, delet, onDelete, toReserve, onEdit }) => {
   return (
-    <div className="card card-side bg-white shadow-xl rounded-lg w-full h-64 my-5  hover:z-10 transition hover:scale-105">
+    <div key={key} className="card card-side bg-white shadow-xl rounded-lg w-full h-64 my-5  hover:z-10 transition hover:scale-105">
       <figure className="w-64">
         <div className="h-96 carousel carousel-vertical rounded-box">
           <div className="carousel-item w-64 h-64">
