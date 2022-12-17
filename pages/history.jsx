@@ -120,7 +120,7 @@ function History() {
       <div className="p-5">
         {historydata ? (
           historydata.map((item) => (
-            <div id={item.id} className="mb-5">
+            <div key={item.id} id={item.id} className="mb-5">
               <Historycard
                 key={item.id}
                 homestay_name={item.homestay_name}
