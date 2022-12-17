@@ -184,7 +184,7 @@ const Homestay = () => {
           <p className="text-2xl text-pink-airbnb">Last 3 reviews :</p>
           {feedbackdata ? (
             feedbackdata.slice(-3).map((item) => (
-              <div className="py-5">
+              <div key={item.id} className="py-5">
                 <p className="flex items-center">
                   {item.rating} <AiFillStar /> from {item.poster}
                 </p>
